@@ -1,0 +1,101 @@
+============================================================
+  ERP MUNICIPAL — INSTRUCCIONES PARA EJECUTAR LAS APPS
+============================================================
+
+REQUISITO PREVIO: Node.js
+--------------------------
+Descarga e instala Node.js LTS desde:
+  https://nodejs.org
+
+Elige la version recomendada (LTS) e instala con las
+opciones por defecto.
+
+Tras instalar, cierra y vuelve a abrir la terminal.
+
+Para verificar que esta bien instalado, ejecuta:
+  node --version    (debe aparecer v18 o superior)
+  npm --version     (debe aparecer v9 o superior)
+
+
+============================================================
+  OPCION A — Aplicacion multi-pantalla
+  Puerto: http://localhost:5173
+============================================================
+
+Abre una terminal en la carpeta del proyecto y ejecuta:
+
+  cd option-a
+  npm install
+  npm run dev
+
+Luego abre el navegador en:  http://localhost:5173
+
+Pantallas disponibles:
+  - Login: pantalla de entrada (cualquier usuario/contrasena)
+  - Panel principal: calendario mensual + proximas actividades
+  - Autobus: tabla de excursiones, inscripcion de pasajeros
+  - Voluntariado: igual que Autobus + aviso si hay pocos participantes
+  - Asociaciones: actividades de asociaciones locales
+
+Funciones disponibles en cada pagina de actividades:
+  - Añadir, editar y eliminar actividades
+  - Ver participantes inscritos (clic en la fila)
+  - Exportar XLSX: descarga un fichero Excel real con los datos
+  - Generar cartel: exporta una imagen PNG del cartel de la actividad
+
+
+============================================================
+  OPCION B — Aplicacion calendario (pantalla unica)
+  Puerto: http://localhost:5174
+============================================================
+
+Abre UNA NUEVA terminal (o pestana) y ejecuta:
+
+  cd option-b
+  npm install
+  npm run dev
+
+Luego abre el navegador en:  http://localhost:5174
+
+Funcionalidades:
+  - Vista Mes / Semana / Dia (botones en la barra superior)
+  - Panel lateral con todas las actividades agrupadas por mes
+  - Clic en un dia del calendario: abre formulario de nueva actividad
+  - Clic en una actividad (chip de color): abre formulario de edicion
+  - Filtros por tipo (Autobus / Voluntariado / Asociaciones)
+  - Exportar XLSX: descarga todas las actividades en Excel
+  - Boton "+" Nueva actividad en la barra superior y en el panel lateral
+
+
+============================================================
+  NOTAS
+============================================================
+
+- El comando "npm install" solo hay que ejecutarlo UNA VEZ
+  por cada app (crea la carpeta node_modules con las librerias).
+
+- Ambas apps se pueden ejecutar al mismo tiempo en puertos
+  distintos (5173 y 5174).
+
+- Los datos son de prueba (no hay base de datos). Los cambios
+  que hagas se pierden al recargar la pagina.
+
+- Para parar la app: pulsa Ctrl+C en la terminal.
+
+- Si cierras la terminal y quieres volver a lanzarla:
+    cd option-a        (o option-b)
+    npm run dev
+  (no hace falta volver a ejecutar npm install)
+
+
+============================================================
+  LIBRERIAS INCLUIDAS
+============================================================
+
+  React 18        — interfaz de usuario
+  Vite 5          — servidor de desarrollo
+  Tailwind CSS 3  — estilos
+  SheetJS (xlsx)  — exportacion real a ficheros .xlsx
+  html2canvas     — descarga del cartel como imagen PNG
+
+============================================================

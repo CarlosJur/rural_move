@@ -1,0 +1,116 @@
+import { TIPO_COLORS } from '../data/mockData'
+import { DIAS_SEMANA_SHORT, mondayOffset } from '../utils/dateUtils'
+
+export default function MonthGrid({ currentDate, actividades, selectedTipos, onDayClick, onActivityClick }) {
+  const year = currentDate.getFullYear()
+  const month = currentDate.getMonth()
+  const today = new Date()
+
+  const firstDay = new Date(year, month, 1)
+  const daysInMonth = new Date(year, month + 1, 0).getDate()
+  const startOffset = mondayOffset(firstDay)
+
+  const cells = []
+  for (let i = 0; i < startOffset; i++) cells.push(null)
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d)
+  while (cells.length % 7 !== 0) cells.push(null)
+
+  const isoOfDay = (d) =>
+    `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
+
+  const actsByDay = {}
+  actividades.forEach((a) => {
+    const [y, m, d] = a.fecha.split('-').map(Number)
+    if (y === year && m === month + 1 && selectedTipos.includes(a.tipo)) {
+      if (!actsByDay[d]) actsByDay[d] = []
+      actsByDay[d].push(a)
+    }
+  })
+
+  const isToday = (d) =>
+    d === today.getDate() && month === today.getMonth() && year === today.getFullYear()
+
+  return (
+    <div className="flex flex-col flex-1 overflow-hidden">
+      {/* Day headers */}
+      <div className="grid grid-cols-7 border-b border-slate-200 flex-shrink-0 bg-white">
+        {DIAS_SEMANA_SHORT.map((d) => (
+          <div key={d} className="text-center text-xs font-semibold text-slate-500 py-2 border-r border-slate-100 last:border-r-0">
+            {d}
+          </div>
+        ))}
+      </div>
+
+      {/* Grid */}
+      <div className="grid grid-cols-7 flex-1 overflow-y-auto">
+        {cells.map((day, idx) => {
+          const dayActs = day ? (actsByDay[day] || []) : []
+          const visible = dayActs.slice(0, 3)
+          const extra = dayActs.length - visible.length
+          const iso = day ? isoOfDay(day) : null
+
+          return (
+            <div
+              key={idx}
+              onClick={() => day && onDayClick(iso)}
+              className={`group relative min-h-[100px] border-b border-r border-slate-100 last:border-r-0 p-1 transition-colors ${
+                day
+                  ? isToday(day)
+                    ? 'bg-blue-50 hover:bg-blue-100'
+                    : 'bg-white hover:bg-slate-50 cursor-pointer'
+                  : 'bg-slate-50/50'
+              }`}
+            >
+              {day && (
+                <>
+                  {/* Day number */}
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`text-xs font-semibold w-6 h-6 flex items-center justify-center rounded-full ${
+                        isToday(day)
+                          ? 'bg-blue-600 text-white'
+                          : 'text-slate-700'
+                      }`}
+                    >
+                      {day}
+                    </span>
+                    {/* + button on hover */}
+                    <button
+                      onClick={(e) => { e.stopPropagation(); onDayClick(iso) }}
+                      className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-blue-600 text-sm transition-opacity leading-none"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  {/* Activity chips */}
+                  <div className="mt-0.5 space-y-0.5">
+                    {visible.map((a) => (
+                      <div
+                        key={a.id}
+                        onClick={(e) => { e.stopPropagation(); onActivityClick(a) }}
+                        className="text-[11px] truncate rounded px-1 py-0.5 text-white font-medium cursor-pointer hover:opacity-90 transition-opacity"
+                        style={{ backgroundColor: TIPO_COLORS[a.tipo].dot }}
+                        title={a.concepto}
+                      >
+                        {a.hora} {a.concepto}
+                      </div>
+                    ))}
+                    {extra > 0 && (
+                      <div
+                        onClick={(e) => { e.stopPropagation(); onDayClick(iso) }}
+                        className="text-[10px] text-slate-500 hover:text-slate-700 cursor-pointer pl-1"
+                      >
+                        +{extra} más
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
