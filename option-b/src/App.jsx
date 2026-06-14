@@ -10,6 +10,8 @@ import WeekGrid from './components/WeekGrid'
 import DayGrid from './components/DayGrid'
 import ActivityModal from './components/ActivityModal'
 import PosterModal from './components/PosterModal'
+import ActivitiesPage from './components/ActivitiesPage'
+import Icon from './components/Icon'
 
 const deepCopy = (v) => JSON.parse(JSON.stringify(v))
 
@@ -26,6 +28,7 @@ export default function App() {
     prefillDate: null,
   })
   const [posterTarget, setPosterTarget] = useState(null)
+  const [currentPage, setCurrentPage] = useState('calendar')
 
   const addActividad = (data) =>
     setActividades((prev) => [...prev, { ...data, id: Date.now(), participantes: data.participantes || [] }])
@@ -77,72 +80,105 @@ export default function App() {
       {/* Cabeceira institucional */}
       <Header />
 
-      {/* Toolbar */}
-      <Toolbar
-        currentDate={currentDate}
-        viewMode={viewMode}
-        onViewChange={setViewMode}
-        onPrev={() => navigate(-1)}
-        onNext={() => navigate(1)}
-        onToday={goToday}
-        onToggleSidebar={() => setSidePanelOpen((v) => !v)}
-        onExportXLSX={() => exportarTodas(actividades)}
-        onNuevaActividad={() => openAdd()}
-        selectedTipos={selectedTipos}
-        onToggleTipo={toggleTipo}
-      />
-
-      {/* Main area */}
-      <div className="flex flex-1 overflow-hidden">
-        <SidePanel
-          open={sidePanelOpen}
-          actividades={actividades}
-          onEdit={openEdit}
-          onDelete={deleteActividad}
-          onAddParticipant={openAddParticipant}
-          onNueva={() => openAdd()}
-        />
-
-        <div className="flex flex-col flex-1 overflow-hidden">
-          {viewMode === 'month' && (
-            <div className="flex items-center justify-between px-4 py-2 border-b border-sage-200 bg-cream-100 flex-shrink-0">
-              <h2 className="heading-display text-base">
-                {MESES[currentDate.getMonth()]} <span className="text-rioja-500 not-italic font-bold">{currentDate.getFullYear()}</span>
-              </h2>
-              <div className="flex items-center gap-2 text-xs text-sage-600 font-medium">
-                <span>{actividades.filter((a) => selectedTipos.includes(a.tipo)).length} actividades visibles</span>
-              </div>
-            </div>
-          )}
-
-          {viewMode === 'month' && (
-            <MonthGrid
-              currentDate={currentDate}
-              actividades={actividades}
-              selectedTipos={selectedTipos}
-              onDayClick={openAdd}
-              onActivityClick={openEdit}
-            />
-          )}
-          {viewMode === 'week' && (
-            <WeekGrid
-              currentDate={currentDate}
-              actividades={actividades}
-              selectedTipos={selectedTipos}
-              onDayClick={openAdd}
-              onActivityClick={openEdit}
-            />
-          )}
-          {viewMode === 'day' && (
-            <DayGrid
-              currentDate={currentDate}
-              actividades={actividades}
-              selectedTipos={selectedTipos}
-              onActivityClick={openEdit}
-            />
-          )}
-        </div>
+      {/* Navigation tabs */}
+      <div className="flex items-center gap-1 px-4 border-b border-sage-200 bg-cream-50 flex-shrink-0">
+        {[
+          { id: 'calendar', label: 'Calendario', icon: 'calendar' },
+          { id: 'actividades', label: 'Actividades', icon: 'table' },
+        ].map(({ id, label, icon }) => (
+          <button
+            key={id}
+            onClick={() => setCurrentPage(id)}
+            className={`inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors ${
+              currentPage === id
+                ? 'border-rioja-500 text-rioja-600'
+                : 'border-transparent text-sage-600 hover:text-sage-800 hover:border-sage-300'
+            }`}
+          >
+            <Icon name={icon} size={15} /> {label}
+          </button>
+        ))}
       </div>
+
+      {/* Calendar page */}
+      {currentPage === 'calendar' && (
+        <>
+          <Toolbar
+            currentDate={currentDate}
+            viewMode={viewMode}
+            onViewChange={setViewMode}
+            onPrev={() => navigate(-1)}
+            onNext={() => navigate(1)}
+            onToday={goToday}
+            onToggleSidebar={() => setSidePanelOpen((v) => !v)}
+            onExportXLSX={() => exportarTodas(actividades)}
+            onNuevaActividad={() => openAdd()}
+            selectedTipos={selectedTipos}
+            onToggleTipo={toggleTipo}
+          />
+          <div className="flex flex-1 overflow-hidden">
+            <SidePanel
+              open={sidePanelOpen}
+              actividades={actividades}
+              onEdit={openEdit}
+              onDelete={deleteActividad}
+              onAddParticipant={openAddParticipant}
+              onNueva={() => openAdd()}
+            />
+            <div className="flex flex-col flex-1 overflow-hidden">
+              {viewMode === 'month' && (
+                <div className="flex items-center justify-between px-4 py-2 border-b border-sage-200 bg-cream-100 flex-shrink-0">
+                  <h2 className="heading-display text-base">
+                    {MESES[currentDate.getMonth()]} <span className="text-rioja-500 not-italic font-bold">{currentDate.getFullYear()}</span>
+                  </h2>
+                  <div className="flex items-center gap-2 text-xs text-sage-600 font-medium">
+                    <span>{actividades.filter((a) => selectedTipos.includes(a.tipo)).length} actividades visibles</span>
+                  </div>
+                </div>
+              )}
+              {viewMode === 'month' && (
+                <MonthGrid
+                  currentDate={currentDate}
+                  actividades={actividades}
+                  selectedTipos={selectedTipos}
+                  onDayClick={openAdd}
+                  onActivityClick={openEdit}
+                />
+              )}
+              {viewMode === 'week' && (
+                <WeekGrid
+                  currentDate={currentDate}
+                  actividades={actividades}
+                  selectedTipos={selectedTipos}
+                  onDayClick={openAdd}
+                  onActivityClick={openEdit}
+                />
+              )}
+              {viewMode === 'day' && (
+                <DayGrid
+                  currentDate={currentDate}
+                  actividades={actividades}
+                  selectedTipos={selectedTipos}
+                  onActivityClick={openEdit}
+                />
+              )}
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Actividades page */}
+      {currentPage === 'actividades' && (
+        <div className="flex-1 overflow-hidden">
+          <ActivitiesPage
+            actividades={actividades}
+            onAdd={() => openAdd()}
+            onEdit={openEdit}
+            onDelete={deleteActividad}
+            onGenerarCartel={setPosterTarget}
+          />
+        </div>
+      )}
 
       {/* Footer institucional */}
       <footer className="flex-shrink-0 border-t-2 border-sage-300 bg-sage-gradient">
