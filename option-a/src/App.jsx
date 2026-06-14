@@ -3,9 +3,7 @@ import { actividades as mockActividades } from './data/mockData'
 import Login from './components/Login'
 import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
-import AutobusPage from './components/AutobusPage'
-import VoluntariadoPage from './components/VoluntariadoPage'
-import AsociacionesPage from './components/AsociacionesPage'
+import ActivitiesPage from './components/ActivitiesPage'
 
 const deepCopy = (v) => JSON.parse(JSON.stringify(v))
 
@@ -27,25 +25,16 @@ export default function App() {
   }
 
   const pageMap = {
-    dashboard: <Dashboard actividades={actividades} />,
-    autobus: (
-      <AutobusPage
+    dashboard: (
+      <Dashboard
         actividades={actividades}
         onAdd={addActividad}
         onUpdate={updateActividad}
         onDelete={deleteActividad}
       />
     ),
-    voluntariado: (
-      <VoluntariadoPage
-        actividades={actividades}
-        onAdd={addActividad}
-        onUpdate={updateActividad}
-        onDelete={deleteActividad}
-      />
-    ),
-    asociaciones: (
-      <AsociacionesPage
+    actividades: (
+      <ActivitiesPage
         actividades={actividades}
         onAdd={addActividad}
         onUpdate={updateActividad}
@@ -57,7 +46,7 @@ export default function App() {
   return (
     <div className="flex h-screen bg-slate-100 overflow-hidden">
       <Sidebar currentPage={currentPage} onNavigate={setCurrentPage} />
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-hidden">
         {pageMap[currentPage] || pageMap.dashboard}
       </main>
     </div>
