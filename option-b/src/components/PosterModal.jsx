@@ -1,11 +1,13 @@
 import { useRef, useState } from 'react'
 import { TIPO_COLORS } from '../data/mockData'
 import { formatFecha } from '../utils/dateUtils'
+import { TIPO_ICONS, IconCalendar, IconClock, IconUser, IconMapPin, IconCommunity, IconUsers, IconBuilding, IconDownload } from './Icons'
 
 export default function PosterModal({ actividad, onClose }) {
   const posterRef = useRef(null)
   const [downloading, setDownloading] = useState(false)
   const c = TIPO_COLORS[actividad.tipo]
+  const TipoIcon = TIPO_ICONS[actividad.tipo]
 
   const handleDescargar = async () => {
     setDownloading(true)
@@ -47,8 +49,8 @@ export default function PosterModal({ actividad, onClose }) {
           >
             <div style={{ backgroundColor: c.dot }} className="h-2" />
             <div style={{ backgroundColor: c.dot }} className="px-8 py-6">
-              <span className="bg-white/25 text-white text-xs font-bold px-2.5 py-1 rounded-full">
-                {c.icon} {c.label.toUpperCase()}
+              <span className="bg-white/25 text-white text-xs font-bold px-2.5 py-1 rounded-full inline-flex items-center gap-1.5">
+                <TipoIcon className="w-3.5 h-3.5" /> {c.label.toUpperCase()}
               </span>
               <h1 className="text-white text-2xl font-extrabold leading-tight mt-3">
                 {actividad.concepto}
@@ -57,20 +59,20 @@ export default function PosterModal({ actividad, onClose }) {
 
             <div className="px-8 py-6 space-y-3">
               <div className="grid grid-cols-2 gap-4">
-                <InfoRow icon="📅" label="Fecha" value={formatFecha(actividad.fecha)} />
-                <InfoRow icon="🕐" label="Hora" value={actividad.hora} />
+                <InfoRow icon={<IconCalendar />} label="Fecha" value={formatFecha(actividad.fecha)} />
+                <InfoRow icon={<IconClock />} label="Hora" value={actividad.hora} />
               </div>
               {conductor && (
                 <InfoRow
-                  icon="👤"
+                  icon={<IconUser />}
                   label={actividad.conductor ? 'Conductor' : actividad.voluntario != null ? 'Voluntario conductor' : 'Responsable'}
                   value={conductor}
                 />
               )}
-              {actividad.lugar && <InfoRow icon="📍" label="Lugar" value={actividad.lugar} />}
-              {actividad.asociacion && <InfoRow icon="🏘️" label="Asociación" value={actividad.asociacion} />}
+              {actividad.lugar && <InfoRow icon={<IconMapPin />} label="Lugar" value={actividad.lugar} />}
+              {actividad.asociacion && <InfoRow icon={<IconCommunity />} label="Asociación" value={actividad.asociacion} />}
               {actividad.plazas != null && (
-                <InfoRow icon="👥" label="Plazas disponibles" value={`${actividad.participantes.length} / ${actividad.plazas}`} />
+                <InfoRow icon={<IconUsers />} label="Plazas disponibles" value={`${actividad.participantes.length} / ${actividad.plazas}`} />
               )}
             </div>
 
@@ -79,7 +81,7 @@ export default function PosterModal({ actividad, onClose }) {
                 <p className="text-xs font-bold text-slate-700">Ayuntamiento de Villarejo de Salvanés</p>
                 <p className="text-xs text-slate-500">Concejalía de Cultura y Servicios Sociales</p>
               </div>
-              <span className="text-3xl opacity-20">🏛️</span>
+              <IconBuilding className="w-8 h-8 text-slate-200" />
             </div>
           </div>
         </div>
@@ -91,9 +93,9 @@ export default function PosterModal({ actividad, onClose }) {
           <button
             onClick={handleDescargar}
             disabled={downloading}
-            className="px-5 py-2 rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold disabled:opacity-60"
+            className="flex items-center gap-1.5 px-5 py-2 rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold disabled:opacity-60"
           >
-            {downloading ? 'Generando...' : '⬇ Descargar como imagen'}
+            <IconDownload /> {downloading ? 'Generando...' : 'Descargar como imagen'}
           </button>
         </div>
       </div>
@@ -104,7 +106,7 @@ export default function PosterModal({ actividad, onClose }) {
 function InfoRow({ icon, label, value }) {
   return (
     <div className="flex items-start gap-3">
-      <span className="text-base mt-0.5">{icon}</span>
+      <span className="mt-0.5 flex-shrink-0 text-slate-400">{icon}</span>
       <div>
         <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">{label}</p>
         <p className="text-sm font-semibold text-slate-800">{value}</p>

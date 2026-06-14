@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { IconBuilding } from './Icons'
 
 export default function Login({ onLogin }) {
   const [usuario, setUsuario] = useState('')
@@ -10,7 +11,7 @@ export default function Login({ onLogin }) {
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-3">
-            <span className="text-3xl">🏛️</span>
+            <IconBuilding className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-xl font-bold text-slate-800 text-center">Sistema de Gestión Municipal</h1>
           <p className="text-sm text-slate-500 mt-1 text-center">Ayuntamiento de Villarejo de Salvanés</p>

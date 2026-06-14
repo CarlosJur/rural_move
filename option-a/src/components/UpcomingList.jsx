@@ -1,5 +1,6 @@
 import { TIPO_COLORS } from '../data/mockData'
 import { formatFecha } from '../utils/dateUtils'
+import { TIPO_ICONS } from './Icons'
 
 export default function UpcomingList({ actividades }) {
   const today = new Date().toISOString().slice(0, 10)
@@ -19,9 +20,10 @@ export default function UpcomingList({ actividades }) {
         )}
         {upcoming.map((a) => {
           const c = TIPO_COLORS[a.tipo]
+          const TipoIcon = TIPO_ICONS[a.tipo]
           return (
             <div key={a.id} className={`flex gap-3 p-3 border-l-4 ${c.border}`}>
-              <span className="text-lg flex-shrink-0">{c.icon}</span>
+              <span className={`flex-shrink-0 mt-0.5 ${c.text}`}><TipoIcon /></span>
               <div className="min-w-0">
                 <p className="text-sm font-medium text-slate-800 truncate">{a.concepto}</p>
                 <p className="text-xs text-slate-500 mt-0.5">

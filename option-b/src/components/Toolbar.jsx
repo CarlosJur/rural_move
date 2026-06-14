@@ -1,5 +1,6 @@
 import { TIPO_COLORS } from '../data/mockData'
 import { MESES } from '../utils/dateUtils'
+import { TIPO_ICONS, IconMenu, IconTable } from './Icons'
 
 export default function Toolbar({
   currentDate,
@@ -26,7 +27,7 @@ export default function Toolbar({
           className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600 text-base"
           title="Alternar panel lateral"
         >
-          ☰
+          <IconMenu />
         </button>
         <button
           onClick={onToday}
@@ -85,7 +86,7 @@ export default function Toolbar({
                   : 'bg-white text-slate-500 border-slate-300 hover:border-slate-400'
               }`}
             >
-              {c.icon} {c.label}
+              {(() => { const I = TIPO_ICONS[tipo]; return <I className="w-3 h-3" /> })()} {c.label}
             </button>
           )
         })}
@@ -102,7 +103,7 @@ export default function Toolbar({
           onClick={onExportXLSX}
           className="flex items-center gap-1.5 bg-slate-600 hover:bg-slate-700 text-white text-sm font-medium px-3 py-1.5 rounded-lg transition-colors"
         >
-          📊 XLSX
+          <IconTable /> XLSX
         </button>
       </div>
     </div>

@@ -5,36 +5,7 @@ import { exportarPorTipo } from '../utils/exportXLSX'
 import AddActivityModal from './AddActivityModal'
 import PosterSelectorModal from './PosterSelectorModal'
 import * as XLSX from 'xlsx'
-
-// SVG icons — Notion style
-const IconBus = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-4 h-4">
-    <rect x="2" y="5" width="16" height="10" rx="2" />
-    <path strokeLinecap="round" d="M2 9h16" />
-    <circle cx="5.5" cy="15.5" r="1.5" fill="currentColor" stroke="none" />
-    <circle cx="14.5" cy="15.5" r="1.5" fill="currentColor" stroke="none" />
-    <path strokeLinecap="round" d="M6 5V3M14 5V3" />
-  </svg>
-)
-
-const IconUsers = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-4 h-4">
-    <circle cx="8" cy="6" r="3" />
-    <path strokeLinecap="round" d="M2 17c0-3.314 2.686-5 6-5s6 1.686 6 5" />
-    <circle cx="14" cy="6" r="2.5" />
-    <path strokeLinecap="round" d="M17 17c0-2.5-1.5-4-3.5-4.5" />
-  </svg>
-)
-
-const IconBuilding = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-4 h-4">
-    <path strokeLinecap="round" d="M3 17V8l7-5 7 5v9" />
-    <path strokeLinecap="round" d="M3 17h14" />
-    <rect x="7.5" y="11" width="2.5" height="3" rx="0.5" />
-    <rect x="10" y="11" width="2.5" height="3" rx="0.5" />
-    <path strokeLinecap="round" d="M10 3v5" />
-  </svg>
-)
+import { TIPO_ICONS, IconWarning, IconPencil, IconTrash, IconImage, IconMapPin, IconCalendar } from './Icons'
 
 const IconFilter = () => (
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-3.5 h-3.5">
@@ -42,14 +13,6 @@ const IconFilter = () => (
   </svg>
 )
 
-const IconCalendar = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-3.5 h-3.5">
-    <rect x="3" y="4" width="14" height="13" rx="2" />
-    <path strokeLinecap="round" d="M3 9h14M7 2v4M13 2v4" />
-  </svg>
-)
-
-const TIPO_ICONS = { autobus: IconBus, voluntariado: IconUsers, asociacion: IconBuilding }
 const TIPO_LIST = Object.keys(TIPO_COLORS)
 
 const ESTADO_STYLE = {
@@ -168,7 +131,7 @@ export default function ActivitiesPage({ actividades, onAdd, onUpdate, onDelete 
             onClick={() => setPosterSelectorOpen(true)}
             className="flex items-center gap-1.5 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-3 py-1.5 rounded-lg transition-colors"
           >
-            🖼 Generar cartel
+            <IconImage /> Generar cartel
           </button>
           <button
             onClick={openAdd}
@@ -384,24 +347,24 @@ export default function ActivitiesPage({ actividades, onAdd, onUpdate, onDelete 
                           </span>
                         )}
                         {isLow && (
-                          <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">
-                            ⚠️ Pocos
+                          <span className="inline-flex items-center gap-1 text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">
+                            <IconWarning className="w-3 h-3" /> Pocos
                           </span>
                         )}
                       </div>
                     </td>
                     <td className="px-4 py-3 hidden lg:table-cell">
                       {a.lugar
-                        ? <span className="text-xs text-slate-500">📍 {a.lugar}</span>
+                        ? <span className="inline-flex items-center gap-1 text-xs text-slate-500"><IconMapPin className="w-3 h-3" /> {a.lugar}</span>
                         : <span className="text-xs text-slate-300">—</span>
                       }
                     </td>
                     <td className="px-4 py-3 text-right whitespace-nowrap">
-                      <button onClick={(e) => { e.stopPropagation(); openEdit(a) }} className="text-xs text-blue-600 hover:text-blue-800 font-medium mr-3">
-                        ✏️ Editar
+                      <button onClick={(e) => { e.stopPropagation(); openEdit(a) }} className="inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium mr-3">
+                        <IconPencil /> Editar
                       </button>
-                      <button onClick={(e) => { e.stopPropagation(); handleDelete(a.id) }} className="text-xs text-red-500 hover:text-red-700 font-medium">
-                        🗑
+                      <button onClick={(e) => { e.stopPropagation(); handleDelete(a.id) }} className="inline-flex items-center gap-1 text-xs text-red-500 hover:text-red-700 font-medium">
+                        <IconTrash />
                       </button>
                     </td>
                   </tr>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { TIPO_COLORS, getEstado } from '../data/mockData'
 import { formatFecha } from '../utils/dateUtils'
+import { TIPO_ICONS, IconWarning, IconPencil, IconTrash, IconTable, IconImage } from './Icons'
 
 const COLUMN_DEFS = {
   autobus: [
@@ -69,8 +70,9 @@ export default function ActivityTable({
       {/* Toolbar */}
       <div className="flex items-center justify-between mb-4 gap-2 flex-wrap">
         <div className="flex items-center gap-2">
-          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full text-white ${c.bg}`}>
-            {c.icon} {c.label}
+          <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full text-white ${c.bg}`}>
+            {(() => { const I = TIPO_ICONS[tipo]; return <I className="w-3.5 h-3.5" /> })()}
+            {c.label}
           </span>
           <span className="text-sm text-slate-500">{actividades.length} registros</span>
         </div>
@@ -85,7 +87,7 @@ export default function ActivityTable({
             onClick={onExportXLSX}
             className="flex items-center gap-1.5 bg-slate-600 hover:bg-slate-700 text-white text-sm font-medium px-3 py-1.5 rounded-lg transition-colors"
           >
-            📊 Exportar XLSX
+            <IconTable /> Exportar XLSX
           </button>
           <button
             onClick={() => selectedId && onGenerarCartel(actividades.find((a) => a.id === selectedId))}
@@ -93,7 +95,7 @@ export default function ActivityTable({
             className="flex items-center gap-1.5 bg-orange-500 hover:bg-orange-600 disabled:opacity-40 text-white text-sm font-medium px-3 py-1.5 rounded-lg transition-colors"
             title={!selectedId ? 'Selecciona una fila primero' : ''}
           >
-            🖼 Generar cartel
+            <IconImage /> Generar cartel
           </button>
         </div>
       </div>
@@ -154,8 +156,8 @@ export default function ActivityTable({
                               {getEstado(a)}
                             </span>
                             {isLowParticipants(a) && (
-                              <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">
-                                ⚠️ Pocos participantes
+                              <span className="inline-flex items-center gap-1 text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-medium">
+                                <IconWarning className="w-3 h-3" /> Pocos participantes
                               </span>
                             )}
                           </div>
@@ -169,15 +171,15 @@ export default function ActivityTable({
                     <td className="px-4 py-3 text-right whitespace-nowrap">
                       <button
                         onClick={(e) => { e.stopPropagation(); onEdit(a) }}
-                        className="text-xs text-blue-600 hover:text-blue-800 font-medium mr-3"
+                        className="inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium mr-3"
                       >
-                        ✏️ Editar
+                        <IconPencil /> Editar
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); onDelete(a.id) }}
-                        className="text-xs text-red-500 hover:text-red-700 font-medium"
+                        className="inline-flex items-center gap-1 text-xs text-red-500 hover:text-red-700 font-medium"
                       >
-                        🗑 Eliminar
+                        <IconTrash /> Eliminar
                       </button>
                     </td>
                   </tr>

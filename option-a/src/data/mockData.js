@@ -114,7 +114,6 @@ export const TIPO_COLORS = {
     border: 'border-blue-600',
     dot: '#2563eb',
     label: 'Autobús',
-    icon: '🚌',
   },
   voluntariado: {
     bg: 'bg-green-600',
@@ -123,7 +122,6 @@ export const TIPO_COLORS = {
     border: 'border-green-600',
     dot: '#16a34a',
     label: 'Voluntariado',
-    icon: '🤝',
   },
   asociacion: {
     bg: 'bg-orange-500',
@@ -132,6 +130,5 @@ export const TIPO_COLORS = {
     border: 'border-orange-500',
     dot: '#f97316',
     label: 'Asociaciones',
-    icon: '🏛️',
   },
 }

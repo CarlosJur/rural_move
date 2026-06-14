@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { TIPO_COLORS } from '../data/mockData'
+import { IconWarning } from './Icons'
 
 const EMPTY = {
   autobus: { concepto: '', conductor: '', fecha: '', hora: '', plazas: 30, asociacion: '', participantes: [] },
@@ -103,8 +104,9 @@ export default function AddActivityModal({ tipo, actividad, onSave, onClose }) {
                 <input type="number" min={1} value={form.plazas} onChange={(e) => set('plazas', Number(e.target.value))} className="input" />
               </Field>
               {isVoluntariadoWarning && (
-                <div className="bg-yellow-50 border border-yellow-400 rounded-lg p-3 text-yellow-800 text-sm">
-                  ⚠️ El voluntariado requiere al menos 2 participantes además del conductor para realizarse.
+                <div className="bg-yellow-50 border border-yellow-400 rounded-lg p-3 text-yellow-800 text-sm flex items-start gap-2">
+                  <IconWarning className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                  El voluntariado requiere al menos 2 participantes además del conductor para realizarse.
                 </div>
               )}
             </>

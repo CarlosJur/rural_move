@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { TIPO_COLORS } from '../data/mockData'
+import { IconWarning } from './Icons'
 
 const DEFAULTS = {
   tipo: 'autobus',
@@ -166,8 +167,9 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                 </Field>
               </div>
               {voluntariadoWarning && (
-                <div className="bg-yellow-50 border border-yellow-400 rounded-lg p-3 text-yellow-800 text-sm">
-                  ⚠️ El voluntariado requiere mínimo 2 participantes además del conductor para poder realizarse.
+                <div className="bg-yellow-50 border border-yellow-400 rounded-lg p-3 text-yellow-800 text-sm flex items-start gap-2">
+                  <IconWarning className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                  El voluntariado requiere mínimo 2 participantes además del conductor para poder realizarse.
                 </div>
               )}
             </>
