@@ -6,6 +6,7 @@ export const actividades = [
     conductor: 'Manuel García',
     fecha: '2025-07-15',
     hora: '09:00',
+    horaVuelta: '20:00',
     plazas: 40,
     asociacion: 'Asociación de Mayores',
     participantes: [
@@ -21,6 +22,7 @@ export const actividades = [
     voluntario: 'Sara Ruiz',
     fecha: '2025-07-18',
     hora: '10:30',
+    horaVuelta: '13:00',
     plazas: 5,
     participantes: [
       { nombre: 'Pedro Sánchez', parada: 'Avenida Central' },
@@ -44,6 +46,7 @@ export const actividades = [
     conductor: 'Jorge Méndez',
     fecha: '2025-07-29',
     hora: '08:30',
+    horaVuelta: '19:00',
     plazas: 35,
     asociacion: 'Club de Jubilados',
     participantes: [
@@ -57,6 +60,7 @@ export const actividades = [
     voluntario: 'Elena Torres',
     fecha: '2025-08-05',
     hora: '09:00',
+    horaVuelta: '12:00',
     plazas: 8,
     participantes: [
       { nombre: 'Raúl Gómez', parada: 'Mercado Central' },
@@ -81,6 +85,7 @@ export const actividades = [
     conductor: 'Pedro Jiménez',
     fecha: '2025-08-19',
     hora: '07:45',
+    horaVuelta: '18:30',
     plazas: 50,
     asociacion: 'Club Senderismo El Roble',
     participantes: [],

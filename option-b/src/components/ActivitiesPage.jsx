@@ -16,7 +16,7 @@ function getPersoal(a) {
 
 export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, onGenerarCartel }) {
   const [selectedTipos, setSelectedTipos] = useState(Object.keys(TIPO_COLORS))
-  const [selectedId, setSelectedId] = useState(null)
+  const [selectedIds, setSelectedIds] = useState(new Set())
   const [expandedId, setExpandedId] = useState(null)
   const [filterOpen, setFilterOpen] = useState(false)
   const filterRef = useRef(null)
@@ -35,15 +35,20 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
     }
   }, [filterOpen])
 
-  const handleSelect = (id) => {
-    setSelectedId((prev) => (prev === id ? null : id))
-    setExpandedId((prev) => (prev === id ? null : id))
-  }
-
   const toggleTipo = (tipo) =>
     setSelectedTipos((prev) =>
       prev.includes(tipo) ? prev.filter((t) => t !== tipo) : [...prev, tipo]
     )
+
+  const toggleSelect = (id, e) => {
+    e.stopPropagation()
+    setSelectedIds((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
 
   const tipos = Object.entries(TIPO_COLORS)
   const allActive = selectedTipos.length === tipos.length
@@ -52,7 +57,26 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
     .filter((a) => selectedTipos.includes(a.tipo))
     .sort((a, b) => a.fecha.localeCompare(b.fecha) || a.hora.localeCompare(b.hora))
 
-  const selectedActividad = selectedId ? actividades.find((a) => a.id === selectedId) : null
+  const allFilteredSelected = filtered.length > 0 && filtered.every((a) => selectedIds.has(a.id))
+  const someFilteredSelected = filtered.some((a) => selectedIds.has(a.id))
+
+  const toggleAllFiltered = () => {
+    if (allFilteredSelected) {
+      setSelectedIds((prev) => {
+        const next = new Set(prev)
+        filtered.forEach((a) => next.delete(a.id))
+        return next
+      })
+    } else {
+      setSelectedIds((prev) => {
+        const next = new Set(prev)
+        filtered.forEach((a) => next.add(a.id))
+        return next
+      })
+    }
+  }
+
+  const selectedActividades = filtered.filter((a) => selectedIds.has(a.id))
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
@@ -67,7 +91,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
             </p>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
-            {/* Filter dropdown — same style as Toolbar */}
+            {/* Filter dropdown */}
             <div className="relative" ref={filterRef}>
               <button
                 onClick={() => setFilterOpen((v) => !v)}
@@ -138,12 +162,12 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
             <div className="w-px h-5 bg-sage-300" />
 
             <button
-              onClick={() => selectedActividad && onGenerarCartel(selectedActividad)}
-              disabled={!selectedActividad}
+              onClick={() => selectedActividades.length > 0 && onGenerarCartel(selectedActividades)}
+              disabled={selectedActividades.length === 0}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-sage-300 bg-white text-sage-700 text-sm font-semibold disabled:opacity-40 hover:bg-sage-50 transition-colors"
-              title={!selectedActividad ? 'Selecciona unha fila para xerar o cartel' : `Xerar cartel: ${selectedActividad.concepto}`}
+              title={selectedActividades.length === 0 ? 'Selecciona actividades para xerar o cartel' : `Xerar cartel para ${selectedActividades.length} actividade(s)`}
             >
-              <Icon name="image" size={15} /> Xerar cartel
+              <Icon name="image" size={15} /> Xerar cartel{selectedActividades.length > 1 ? ` (${selectedActividades.length})` : ''}
             </button>
             <button
               onClick={() => exportarTodas(actividades)}
@@ -167,6 +191,17 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-sage-50 border-b border-sage-200">
+                {/* Checkbox select-all */}
+                <th className="w-10 pl-3 py-2.5">
+                  <input
+                    type="checkbox"
+                    checked={allFilteredSelected}
+                    onChange={toggleAllFiltered}
+                    ref={(el) => { if (el) el.indeterminate = !allFilteredSelected && someFilteredSelected }}
+                    className="cursor-pointer accent-rioja-500"
+                  />
+                </th>
+                {/* Expand chevron */}
                 <th className="w-6" />
                 <th className="text-left text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em] px-4 py-2.5 whitespace-nowrap">
                   Tipo
@@ -178,7 +213,10 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                   Data
                 </th>
                 <th className="text-left text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em] px-4 py-2.5 whitespace-nowrap">
-                  Hora
+                  Hora saída
+                </th>
+                <th className="text-left text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em] px-4 py-2.5 whitespace-nowrap">
+                  Hora volta
                 </th>
                 <th className="text-left text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em] px-4 py-2.5 whitespace-nowrap">
                   Persoal
@@ -197,7 +235,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
             <tbody>
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={9} className="text-center text-sage-400 py-12 text-sm italic">
+                  <td colSpan={11} className="text-center text-sage-400 py-12 text-sm italic">
                     Sen actividades. Cambia o filtro ou preme «Nova» para crear unha.
                   </td>
                 </tr>
@@ -205,18 +243,29 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
               {filtered.map((a) => {
                 const c = TIPO_COLORS[a.tipo]
                 const estado = a.plazas != null ? getEstado(a) : null
-                const isSelected = selectedId === a.id
+                const isSelected = selectedIds.has(a.id)
                 const isExpanded = expandedId === a.id
 
                 return (
                   <>
                     <tr
                       key={a.id}
-                      onClick={() => handleSelect(a.id)}
+                      onClick={() => setExpandedId((prev) => (prev === a.id ? null : a.id))}
                       className={`border-b border-sage-100 cursor-pointer transition-colors ${
                         isSelected ? 'bg-rioja-50' : 'hover:bg-cream-50'
                       }`}
                     >
+                      {/* Checkbox */}
+                      <td className="pl-3" onClick={(e) => e.stopPropagation()}>
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={(e) => toggleSelect(a.id, e)}
+                          className="cursor-pointer accent-rioja-500"
+                        />
+                      </td>
+
+                      {/* Expand chevron */}
                       <td className="pl-3 text-sage-400">
                         <Icon name={isExpanded ? 'chevron-down' : 'chevron-right'} size={13} />
                       </td>
@@ -246,6 +295,10 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
 
                       <td className="px-4 py-2.5 whitespace-nowrap text-sage-700">
                         {a.hora}
+                      </td>
+
+                      <td className="px-4 py-2.5 whitespace-nowrap text-sage-600">
+                        {a.horaVuelta || <span className="text-sage-300">—</span>}
                       </td>
 
                       <td className="px-4 py-2.5 whitespace-nowrap text-sage-600">
@@ -295,7 +348,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
 
                     {isExpanded && (
                       <tr key={`${a.id}-exp`} className="bg-cream-50 border-b border-sage-100">
-                        <td colSpan={9} className="px-8 py-3">
+                        <td colSpan={11} className="px-8 py-3">
                           <p className="text-[11px] font-bold text-sage-600 uppercase tracking-[0.12em] mb-2">
                             Participantes inscritos ({a.participantes.length})
                           </p>
@@ -325,10 +378,13 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
           </table>
         </div>
 
-        {selectedId && selectedActividad && (
+        {selectedActividades.length > 0 && (
           <p className="text-[11px] text-sage-500 italic mt-3 text-right">
-            Seleccionada: <span className="font-semibold text-rioja-600">{selectedActividad.concepto}</span>
-            {' '}— preme «Xerar cartel» para xerar o cartel.
+            {selectedActividades.length === 1
+              ? <>Seleccionada: <span className="font-semibold text-rioja-600">{selectedActividades[0].concepto}</span></>
+              : <><span className="font-semibold text-rioja-600">{selectedActividades.length} actividades</span> seleccionadas</>
+            }
+            {' '}— preme «Xerar cartel» para continuar.
           </p>
         )}
       </div>

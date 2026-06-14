@@ -7,6 +7,7 @@ const DEFAULTS = {
   concepto: '',
   fecha: '',
   hora: '',
+  horaVuelta: '',
   plazas: 20,
   conductor: '',
   voluntario: '',
@@ -107,7 +108,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                 className={inputCls}
               />
             </Field>
-            <Field label="Hora *">
+            <Field label={form.tipo === 'asociacion' ? 'Hora *' : 'Hora saída *'}>
               <input
                 type="time"
                 value={form.hora}
@@ -116,6 +117,17 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
               />
             </Field>
           </div>
+
+          {(form.tipo === 'autobus' || form.tipo === 'voluntariado') && (
+            <Field label="Hora volta (opcional)">
+              <input
+                type="time"
+                value={form.horaVuelta || ''}
+                onChange={(e) => set('horaVuelta', e.target.value)}
+                className={inputCls}
+              />
+            </Field>
+          )}
 
           {/* Conditional fields */}
           {form.tipo === 'autobus' && (

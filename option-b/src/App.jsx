@@ -199,8 +199,8 @@ export default function App() {
         />
       )}
 
-      {posterTarget && (
-        <PosterModal actividad={posterTarget} onClose={() => setPosterTarget(null)} />
+      {posterTarget && posterTarget.length > 0 && (
+        <PosterModal actividades={posterTarget} onClose={() => setPosterTarget(null)} />
       )}
     </div>
   )
