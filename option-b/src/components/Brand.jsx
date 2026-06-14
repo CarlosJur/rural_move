@@ -27,7 +27,7 @@ export default function Header() {
   return (
     <header className="relative bg-sage-gradient border-b-2 border-gray-300 flex-shrink-0">
       {/* Cinta heráldica superior */}
-      <div className="h-1 bg-gradient-to-r from-rioja-500 via-gold-400 to-rioja-500" />
+      <div className="h-px bg-sage-200" />
 
       <div className="flex items-center justify-between px-6 py-3 gap-6">
         {/* Izquierda: escudo + identidad institucional */}

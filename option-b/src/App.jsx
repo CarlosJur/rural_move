@@ -73,7 +73,7 @@ export default function App() {
     )
 
   return (
-    <div className="flex flex-col h-screen bg-cream-50 overflow-hidden">
+    <div className="flex flex-col h-screen bg-cream-100 overflow-hidden">
       {/* Cabeceira institucional */}
       <Header />
 
@@ -105,7 +105,7 @@ export default function App() {
 
         <div className="flex flex-col flex-1 overflow-hidden">
           {viewMode === 'month' && (
-            <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 bg-cream-100 flex-shrink-0">
+            <div className="flex items-center justify-between px-4 pt-3 pb-1 bg-[#F5F5F7] flex-shrink-0">
               <h2 className="heading-display text-base">
                 {MESES[currentDate.getMonth()]} <span className="text-rioja-500 not-italic font-bold">{currentDate.getFullYear()}</span>
               </h2>
@@ -146,7 +146,7 @@ export default function App() {
 
       {/* Footer institucional */}
       <footer className="flex-shrink-0 border-t-2 border-gray-300 bg-sage-gradient">
-        <div className="h-0.5 bg-gradient-to-r from-rioja-500 via-gold-400 to-rioja-500" />
+        <div className="h-px bg-sage-200" />
         <div className="flex items-center justify-between px-6 py-2 gap-4">
           <div className="flex items-center gap-2 text-[10px] text-sage-700">
             <img src="/escudo-san-xoan.jpg" alt="" className="h-6 w-auto mix-blend-multiply" />

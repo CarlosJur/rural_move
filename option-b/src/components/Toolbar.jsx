@@ -41,12 +41,12 @@ export default function Toolbar({
   }, [filterOpen])
 
   return (
-    <div className="flex items-center justify-between h-14 px-4 border-b border-gray-200 bg-cream-50 shadow-sm flex-shrink-0 gap-2 flex-wrap">
+    <div className="flex items-center justify-between h-14 px-4 bg-rioja-500 shadow-sm flex-shrink-0 gap-2 flex-wrap">
       {/* Left group */}
       <div className="flex items-center gap-2">
         <button
           onClick={onToggleSidebar}
-          className="p-2 rounded-lg hover:bg-sage-100 transition-colors text-sage-700"
+          className="p-2 rounded-lg hover:bg-white/15 transition-colors text-white"
           title="Alternar panel lateral"
         >
           <Icon name="panel" size={18} />
@@ -71,8 +71,8 @@ export default function Toolbar({
             <Icon name="chevron-right" size={16} />
           </button>
         </div>
-        <span className="heading-display text-lg whitespace-nowrap text-sage-800">
-          {mes} <span className="text-rioja-500 not-italic font-bold">{year}</span>
+        <span className="heading-display text-lg whitespace-nowrap text-white">
+          {mes} <span className="not-italic font-bold text-white/90">{year}</span>
         </span>
       </div>
 
@@ -154,11 +154,11 @@ export default function Toolbar({
           )}
         </div>
 
-        <div className="w-px h-5 bg-gray-300 mx-1" />
+        <div className="w-px h-5 bg-white/30 mx-1" />
 
         <button
           onClick={onNuevaActividad}
-          className="flex items-center gap-1.5 bg-rioja-500 hover:bg-rioja-600 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors shadow-heraldic"
+          className="flex items-center gap-1.5 bg-white hover:bg-white/90 text-rioja-600 text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors shadow-sm"
         >
           <Icon name="plus" size={15} /> Nova
         </button>

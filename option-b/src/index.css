@@ -6,7 +6,7 @@
   html, body {
     font-family: 'Inter', system-ui, sans-serif;
     color: theme('colors.ink');
-    background: theme('colors.cream.50');
+    background: theme('colors.cream.100');
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -28,14 +28,15 @@
     letter-spacing: -0.01em;
   }
   .heading-display {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic;
-    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: -0.02em;
     color: theme('colors.sage.800');
   }
   /* Scrollbar discreto en tema sage */
   ::-webkit-scrollbar { width: 8px; height: 8px; }
-  ::-webkit-scrollbar-track { background: theme('colors.cream.50'); }
+  ::-webkit-scrollbar-track { background: theme('colors.cream.100'); }
   ::-webkit-scrollbar-thumb { background: theme('colors.sage.300'); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: theme('colors.sage.500'); }
 }

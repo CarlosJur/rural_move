@@ -35,7 +35,7 @@ export default function PosterModal({ actividad, onClose }) {
   return (
     <div className="fixed inset-0 bg-sage-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
       <div className="bg-cream-50 rounded-2xl shadow-2xl w-full max-w-2xl border border-gray-200 overflow-hidden">
-        <div className="h-1 bg-gradient-to-r from-rioja-500 via-gold-400 to-rioja-500" />
+        <div className="h-px bg-sage-200" />
 
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-sage-gradient">
           <h2 className="heading-display text-xl">Xerar cartel</h2>
@@ -49,7 +49,7 @@ export default function PosterModal({ actividad, onClose }) {
             style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
           >
             {/* Cabecera heráldica del cartel */}
-            <div className="h-2" style={{ background: 'linear-gradient(90deg, #C8102E 0%, #4E61A3 50%, #C8102E 100%)' }} />
+            <div className="h-1.5" style={{ backgroundColor: '#0071E3' }} />
             <div className="px-8 py-5 flex items-center gap-4 border-b border-gray-200" style={{ backgroundColor: '#D8E7F7' }}>
               <img src="/escudo-san-xoan.jpg" alt="" className="h-14 w-auto drop-shadow-sm" />
               <div className="flex-1 min-w-0">
