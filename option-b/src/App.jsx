@@ -145,7 +145,7 @@ export default function App() {
       </div>
 
       {/* Footer institucional */}
-      <footer className="flex-shrink-0 border-t-2 border-gray-300 bg-sage-gradient">
+      <footer className="flex-shrink-0 bg-sage-gradient">
         <div className="h-px bg-sage-200" />
         <div className="flex items-center justify-between px-6 py-2 gap-4">
           <div className="flex items-center gap-2 text-[10px] text-sage-700">

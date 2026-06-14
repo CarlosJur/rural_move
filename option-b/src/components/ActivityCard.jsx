@@ -37,7 +37,7 @@ export default function ActivityCard({ actividad, onEdit, onDelete, onAddPartici
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-3 mt-2 pt-2 border-t border-gray-100">
+      <div className="flex items-center gap-3 mt-2 pt-2">
         <button
           onClick={onEdit}
           className="inline-flex items-center gap-1 text-xs text-sage-700 hover:text-sage-900 font-semibold transition-colors"

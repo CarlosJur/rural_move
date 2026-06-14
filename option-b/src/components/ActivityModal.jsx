@@ -59,7 +59,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
         <div className="h-px bg-sage-200" />
 
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-sage-gradient">
+        <div className="flex items-center justify-between px-6 py-4 bg-sage-gradient">
           <h2 className="heading-display text-xl">
             {mode === 'edit' ? 'Editar actividade' : 'Nova actividade'}
           </h2>
@@ -212,7 +212,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
           )}
 
           {/* Participants */}
-          <div className="pt-2 border-t border-gray-200">
+          <div className="pt-2">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-bold text-sage-800">
                 Participantes ({form.participantes.length})
@@ -275,7 +275,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
         </div>
 
         {/* Footer */}
-        <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-cream-100">
+        <div className="flex justify-end gap-3 px-6 py-4 bg-cream-100">
           <button onClick={onClose} className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50">
             Cancelar
           </button>

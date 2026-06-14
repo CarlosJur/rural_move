@@ -17,13 +17,13 @@ export default function SidePanel({ open, actividades, onEdit, onDelete, onAddPa
 
   return (
     <div
-      className={`flex flex-col bg-cream-100 border-r border-gray-200 transition-all duration-300 overflow-hidden flex-shrink-0 ${
+      className={`flex flex-col bg-cream-100 transition-all duration-300 overflow-hidden flex-shrink-0 ${
         open ? 'w-72' : 'w-0'
       }`}
     >
       <div className="w-72 flex flex-col h-full">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-sage-gradient">
+        <div className="flex items-center justify-between px-4 py-3 bg-sage-gradient">
           <h2 className="heading-display text-base">Axenda completa</h2>
           <button
             onClick={onNueva}
@@ -34,7 +34,7 @@ export default function SidePanel({ open, actividades, onEdit, onDelete, onAddPa
         </div>
 
         {/* Legend */}
-        <div className="flex flex-wrap gap-x-3 gap-y-1 px-4 py-2 border-b border-gray-100 bg-[#F5F5F7]">
+        <div className="flex flex-wrap gap-x-3 gap-y-1 px-4 py-2 bg-[#F5F5F7]">
           {Object.entries(TIPO_COLORS).map(([tipo, c]) => (
             <div key={tipo} className="flex items-center gap-1 text-xs text-sage-700 font-medium">
               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: c.dot }} />
@@ -47,7 +47,7 @@ export default function SidePanel({ open, actividades, onEdit, onDelete, onAddPa
         <div className="overflow-y-auto flex-1 bg-[#F5F5F7]">
           {Object.entries(groups).map(([key, { label, items }]) => (
             <div key={key}>
-              <div className="px-4 py-2 bg-gray-50 border-y border-gray-200 sticky top-0 backdrop-blur-sm">
+              <div className="px-4 py-2 bg-gray-50 sticky top-0 backdrop-blur-sm">
                 <span className="text-xs font-bold text-sage-700 uppercase tracking-[0.15em]">{label}</span>
               </div>
               <div className="px-3 py-2 space-y-2">

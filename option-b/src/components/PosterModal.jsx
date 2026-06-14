@@ -37,7 +37,7 @@ export default function PosterModal({ actividad, onClose }) {
       <div className="bg-cream-50 rounded-2xl shadow-2xl w-full max-w-2xl border border-gray-200 overflow-hidden">
         <div className="h-px bg-sage-200" />
 
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-sage-gradient">
+        <div className="flex items-center justify-between px-6 py-4 bg-sage-gradient">
           <h2 className="heading-display text-xl">Xerar cartel</h2>
           <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 transition-colors" title="Pechar"><Icon name="x" size={20} /></button>
         </div>
@@ -106,7 +106,7 @@ export default function PosterModal({ actividad, onClose }) {
           </div>
         </div>
 
-        <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-cream-100">
+        <div className="flex justify-end gap-3 px-6 py-4 bg-cream-100">
           <button onClick={onClose} className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50">
             Pechar
           </button>
