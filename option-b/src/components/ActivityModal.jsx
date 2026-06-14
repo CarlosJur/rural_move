@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { TIPO_COLORS } from '../data/mockData'
+import Icon from './Icon'
 
 const DEFAULTS = {
   tipo: 'autobus',
@@ -62,7 +63,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
           <h2 className="heading-display text-xl">
             {mode === 'edit' ? 'Editar actividade' : 'Nova actividade'}
           </h2>
-          <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 text-2xl leading-none transition-colors">&times;</button>
+          <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 transition-colors" title="Pechar"><Icon name="x" size={20} /></button>
         </div>
 
         <div className="px-6 py-4 space-y-4 max-h-[70vh] overflow-y-auto bg-cream-50">
@@ -82,7 +83,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                       : 'bg-white text-sage-700 border-sage-300 hover:border-sage-500'
                   }`}
                 >
-                  {col.icon} {col.label}
+                  <Icon name={col.icon} size={14} /> {col.label}
                 </button>
               ))}
             </div>
@@ -171,8 +172,9 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                 </Field>
               </div>
               {voluntariadoWarning && (
-                <div className="bg-gold-50 border border-gold-300 rounded-lg p-3 text-gold-800 text-sm">
-                  ⚠️ O voluntariado require un mínimo de 2 participantes ademais do condutor para poder realizarse.
+                <div className="flex items-start gap-2 bg-gold-50 border border-gold-300 rounded-lg p-3 text-gold-800 text-sm">
+                  <Icon name="alert" size={16} className="mt-0.5 shrink-0" />
+                  <span>O voluntariado require un mínimo de 2 participantes ademais do condutor para poder realizarse.</span>
                 </div>
               )}
             </>
@@ -231,9 +233,10 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                     {p.parada && <span className="text-sage-500 text-xs truncate flex-1">· {p.parada}</span>}
                     <button
                       onClick={() => removeParticipante(i)}
-                      className="text-rioja-400 hover:text-rioja-600 text-xs ml-auto"
+                      className="text-rioja-400 hover:text-rioja-600 ml-auto"
+                      title="Quitar"
                     >
-                      ✕
+                      <Icon name="x" size={14} />
                     </button>
                   </div>
                 ))}

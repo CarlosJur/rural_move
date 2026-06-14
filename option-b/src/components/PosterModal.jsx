@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { TIPO_COLORS } from '../data/mockData'
 import { formatFecha } from '../utils/dateUtils'
+import Icon from './Icon'
 
 export default function PosterModal({ actividad, onClose }) {
   const posterRef = useRef(null)
@@ -38,7 +39,7 @@ export default function PosterModal({ actividad, onClose }) {
 
         <div className="flex items-center justify-between px-6 py-4 border-b border-sage-200 bg-sage-gradient">
           <h2 className="heading-display text-xl">Xerar cartel</h2>
-          <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 text-2xl leading-none transition-colors">&times;</button>
+          <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 transition-colors" title="Pechar"><Icon name="x" size={20} /></button>
         </div>
 
         <div className="p-6 flex justify-center bg-cream-100">
@@ -65,8 +66,8 @@ export default function PosterModal({ actividad, onClose }) {
 
             {/* Banda del tipo */}
             <div style={{ backgroundColor: c.dot }} className="px-8 py-5">
-              <span className="bg-white/25 text-white text-[10px] font-bold tracking-[0.15em] px-3 py-1 rounded-full">
-                {c.icon} {c.label.toUpperCase()}
+              <span className="inline-flex items-center gap-1.5 bg-white/25 text-white text-[10px] font-bold tracking-[0.15em] px-3 py-1 rounded-full">
+                <Icon name={c.icon} size={13} /> {c.label.toUpperCase()}
               </span>
               <h1 className="text-white text-2xl font-extrabold leading-tight mt-3" style={{ fontFamily: 'Playfair Display, Georgia, serif', fontStyle: 'italic' }}>
                 {actividad.concepto}
@@ -75,20 +76,20 @@ export default function PosterModal({ actividad, onClose }) {
 
             <div className="px-8 py-6 space-y-3">
               <div className="grid grid-cols-2 gap-4">
-                <InfoRow icon="📅" label="Data" value={formatFecha(actividad.fecha)} />
-                <InfoRow icon="🕐" label="Hora" value={actividad.hora} />
+                <InfoRow icon="calendar" label="Data" value={formatFecha(actividad.fecha)} />
+                <InfoRow icon="clock" label="Hora" value={actividad.hora} />
               </div>
               {conductor && (
                 <InfoRow
-                  icon="👤"
+                  icon="user"
                   label={actividad.conductor ? 'Condutor' : actividad.voluntario != null ? 'Voluntario condutor' : 'Responsable'}
                   value={conductor}
                 />
               )}
-              {actividad.lugar && <InfoRow icon="📍" label="Lugar" value={actividad.lugar} />}
-              {actividad.asociacion && <InfoRow icon="🏘️" label="Asociación" value={actividad.asociacion} />}
+              {actividad.lugar && <InfoRow icon="map-pin" label="Lugar" value={actividad.lugar} />}
+              {actividad.asociacion && <InfoRow icon="home" label="Asociación" value={actividad.asociacion} />}
               {actividad.plazas != null && (
-                <InfoRow icon="👥" label="Prazas dispoñibles" value={`${actividad.participantes.length} / ${actividad.plazas}`} />
+                <InfoRow icon="users" label="Prazas dispoñibles" value={`${actividad.participantes.length} / ${actividad.plazas}`} />
               )}
             </div>
 
@@ -112,9 +113,9 @@ export default function PosterModal({ actividad, onClose }) {
           <button
             onClick={handleDescargar}
             disabled={downloading}
-            className="px-5 py-2 rounded-lg bg-rioja-500 hover:bg-rioja-600 text-white text-sm font-semibold disabled:opacity-60 shadow-heraldic"
+            className="inline-flex items-center gap-1.5 px-5 py-2 rounded-lg bg-rioja-500 hover:bg-rioja-600 text-white text-sm font-semibold disabled:opacity-60 shadow-heraldic"
           >
-            {downloading ? 'Xerando...' : '⬇ Descargar como imaxe'}
+            {downloading ? 'Xerando...' : <><Icon name="download" size={15} /> Descargar como imaxe</>}
           </button>
         </div>
       </div>
@@ -125,7 +126,7 @@ export default function PosterModal({ actividad, onClose }) {
 function InfoRow({ icon, label, value }) {
   return (
     <div className="flex items-start gap-3">
-      <span className="text-base mt-0.5">{icon}</span>
+      <span className="text-sage-500 mt-0.5"><Icon name={icon} size={16} /></span>
       <div>
         <p className="text-[10px] text-sage-600 font-bold uppercase tracking-[0.15em]">{label}</p>
         <p className="text-sm font-semibold text-ink">{value}</p>

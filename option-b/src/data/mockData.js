@@ -114,7 +114,7 @@ export const TIPO_COLORS = {
     border: 'border-rioja-500',
     dot: '#C8102E',
     label: 'Autobús',
-    icon: '🚌',
+    icon: 'bus',
   },
   voluntariado: {
     bg: 'bg-laurel-500',
@@ -123,7 +123,7 @@ export const TIPO_COLORS = {
     border: 'border-laurel-500',
     dot: '#3F7D4E',
     label: 'Voluntariado',
-    icon: '🤝',
+    icon: 'handshake',
   },
   asociacion: {
     bg: 'bg-gold-500',
@@ -132,6 +132,6 @@ export const TIPO_COLORS = {
     border: 'border-gold-500',
     dot: '#B58623',
     label: 'Asociacións',
-    icon: '🏛️',
+    icon: 'landmark',
   },
 }
