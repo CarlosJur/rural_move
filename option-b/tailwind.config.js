@@ -4,18 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Sage / menta — color principal (coche + fondo logo Rural Move)
+        // Azul — color principal de cromo/texto/acentos (azul de Galicia)
         sage: {
-          50:  '#F4F8F5',
-          100: '#E6EFE8',
-          200: '#CFE0D4',
-          300: '#B4CEBC',
-          400: '#9CB8A8',
-          500: '#7FA08D',
-          600: '#5F806E',
-          700: '#476356',
-          800: '#324740',
-          900: '#1F2D29',
+          50:  '#EFF5FC',
+          100: '#D8E7F7',
+          200: '#B3CDEE',
+          300: '#85ADE0',
+          400: '#5589CE',
+          500: '#2E6CB8',
+          600: '#21548F',
+          700: '#1A4170',
+          800: '#142F50',
+          900: '#0E1F36',
         },
         // Rojo institucional — escudo + "move"
         rioja: {
@@ -30,31 +30,31 @@ export default {
           800: '#580712',
           900: '#33040A',
         },
-        // Dorado heráldico — castillo y corona del escudo
+        // Azul marino — tipo "Asociacións" y cinta heráldica
         gold: {
-          50:  '#FBF5E6',
-          100: '#F6E8BD',
-          200: '#EFD37F',
-          300: '#E0B947',
-          400: '#CFA12E',
-          500: '#B58623',
-          600: '#946A19',
-          700: '#6F4F12',
-          800: '#4A340B',
-          900: '#251A05',
+          50:  '#ECEEF6',
+          100: '#D2D8EA',
+          200: '#A6B1D5',
+          300: '#7585BD',
+          400: '#4E61A3',
+          500: '#3A4D8C',
+          600: '#2C3C70',
+          700: '#212C54',
+          800: '#161D38',
+          900: '#0B0F1E',
         },
-        // Verde laurel — palmas del escudo
+        // Azul vivo — tipo "Voluntariado"
         laurel: {
-          50:  '#EFF6F0',
-          100: '#D7E8D9',
-          200: '#A9CCAF',
-          300: '#7BAD83',
-          400: '#558E61',
-          500: '#3F7D4E',
-          600: '#33653F',
-          700: '#264C30',
-          800: '#193320',
-          900: '#0D1A10',
+          50:  '#E8F4FD',
+          100: '#C8E5FB',
+          200: '#95CCF6',
+          300: '#5DAFEE',
+          400: '#2E92E0',
+          500: '#1577C7',
+          600: '#0F5EA0',
+          700: '#0C497C',
+          800: '#093458',
+          900: '#061F36',
         },
         // Azul mar — líneas onduladas del escudo
         ria: {
@@ -62,11 +62,11 @@ export default {
           500: '#4A90D9',
           600: '#356DA8',
         },
-        // Crema/marfil — papel institucional
+        // Blanco/neutro — superficies (antes crema amarillenta)
         cream: {
-          50:  '#FBF8F0',
-          100: '#F5F0E2',
-          200: '#EBE3CC',
+          50:  '#FFFFFF',
+          100: '#F7F8F7',
+          200: '#ECEEEC',
         },
         ink: '#1A1A1A',
       },
@@ -76,13 +76,13 @@ export default {
         sans:    ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
       },
       boxShadow: {
-        'card':     '0 2px 12px -2px rgba(31, 45, 41, 0.08), 0 1px 3px -1px rgba(31, 45, 41, 0.06)',
-        'card-hover': '0 8px 24px -6px rgba(31, 45, 41, 0.15), 0 2px 6px -1px rgba(31, 45, 41, 0.08)',
+        'card':     '0 2px 12px -2px rgba(17, 17, 17, 0.08), 0 1px 3px -1px rgba(17, 17, 17, 0.06)',
+        'card-hover': '0 8px 24px -6px rgba(17, 17, 17, 0.14), 0 2px 6px -1px rgba(17, 17, 17, 0.08)',
         'heraldic': '0 4px 16px -4px rgba(200, 16, 46, 0.25)',
       },
       backgroundImage: {
-        'sage-gradient': 'linear-gradient(135deg, #E6EFE8 0%, #CFE0D4 100%)',
-        'cream-paper':   'linear-gradient(180deg, #FBF8F0 0%, #F5F0E2 100%)',
+        'sage-gradient': 'linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 100%)',
+        'cream-paper':   'linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%)',
       },
     },
   },

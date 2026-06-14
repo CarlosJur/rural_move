@@ -33,9 +33,9 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
   return (
     <div className="flex flex-col flex-1 overflow-hidden bg-cream-50">
       {/* Day headers */}
-      <div className="grid grid-cols-7 border-b-2 border-sage-300 flex-shrink-0 bg-sage-gradient">
+      <div className="grid grid-cols-7 border-b-2 border-gray-300 flex-shrink-0 bg-sage-gradient">
         {DIAS_SEMANA_SHORT.map((d) => (
-          <div key={d} className="text-center text-xs font-bold uppercase tracking-[0.15em] text-sage-800 py-2.5 border-r border-sage-200 last:border-r-0">
+          <div key={d} className="text-center text-xs font-bold uppercase tracking-[0.15em] text-sage-800 py-2.5 border-r border-gray-200 last:border-r-0">
             {d}
           </div>
         ))}
@@ -53,12 +53,12 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
             <div
               key={idx}
               onClick={() => day && onDayClick(iso)}
-              className={`group relative min-h-[100px] border-b border-r border-sage-200 last:border-r-0 p-1.5 transition-colors ${
+              className={`group relative min-h-[100px] border-b border-r border-gray-200 last:border-r-0 p-1.5 transition-colors ${
                 day
                   ? isToday(day)
                     ? 'bg-rioja-50 hover:bg-rioja-100'
                     : 'bg-white hover:bg-sage-50 cursor-pointer'
-                  : 'bg-cream-100/60'
+                  : 'bg-white'
               }`}
             >
               {day && (

@@ -25,7 +25,7 @@ export function Escudo({ className = '' }) {
 
 export default function Header() {
   return (
-    <header className="relative bg-sage-gradient border-b-2 border-sage-300 flex-shrink-0">
+    <header className="relative bg-sage-gradient border-b-2 border-gray-300 flex-shrink-0">
       {/* Cinta heráldica superior */}
       <div className="h-1 bg-gradient-to-r from-rioja-500 via-gold-400 to-rioja-500" />
 

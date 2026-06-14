@@ -34,8 +34,8 @@ export default function WeekGrid({ currentDate, actividades, selectedTipos, onDa
   return (
     <div className="flex flex-1 overflow-hidden bg-cream-50">
       {/* Time gutter */}
-      <div className="w-14 flex-shrink-0 border-r border-sage-200 bg-cream-100">
-        <div className="h-10 border-b border-sage-200" />
+      <div className="w-14 flex-shrink-0 border-r border-gray-200 bg-cream-100">
+        <div className="h-10 border-b border-gray-200" />
         <div className="relative" style={{ height: HOURS.length * ROW_H }}>
           {HOURS.map((h) => (
             <div
@@ -52,7 +52,7 @@ export default function WeekGrid({ currentDate, actividades, selectedTipos, onDa
       {/* Day columns */}
       <div className="flex-1 overflow-auto">
         {/* Day headers */}
-        <div className="grid grid-cols-7 border-b-2 border-sage-300 sticky top-0 bg-sage-gradient z-10">
+        <div className="grid grid-cols-7 border-b-2 border-gray-300 sticky top-0 bg-sage-gradient z-10">
           {days.map((d, i) => {
             const iso = isoOf(d)
             const isToday = iso === today
@@ -60,7 +60,7 @@ export default function WeekGrid({ currentDate, actividades, selectedTipos, onDa
               <div
                 key={i}
                 onClick={() => onDayClick(iso)}
-                className={`text-center py-2 cursor-pointer hover:bg-sage-200/40 border-r border-sage-200 last:border-r-0 transition-colors ${
+                className={`text-center py-2 cursor-pointer hover:bg-sage-200/40 border-r border-gray-200 last:border-r-0 transition-colors ${
                   isToday ? 'bg-rioja-50/80' : ''
                 }`}
               >
@@ -82,7 +82,7 @@ export default function WeekGrid({ currentDate, actividades, selectedTipos, onDa
           {HOURS.map((h) => (
             <div
               key={h}
-              className="absolute left-0 right-0 border-t border-sage-100"
+              className="absolute left-0 right-0 border-t border-gray-100"
               style={{ top: (h - 7) * ROW_H }}
             />
           ))}
@@ -95,7 +95,7 @@ export default function WeekGrid({ currentDate, actividades, selectedTipos, onDa
             return (
               <div
                 key={colIdx}
-                className={`relative border-r border-sage-100 last:border-r-0 ${isToday ? 'bg-rioja-50/20' : ''}`}
+                className={`relative border-r border-gray-100 last:border-r-0 ${isToday ? 'bg-rioja-50/20' : ''}`}
                 style={{ height: HOURS.length * ROW_H }}
               >
                 {dayActs.map((a) => (

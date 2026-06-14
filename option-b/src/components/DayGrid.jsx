@@ -19,8 +19,8 @@ export default function DayGrid({ currentDate, actividades, selectedTipos, onAct
   return (
     <div className="flex flex-1 overflow-hidden bg-cream-50">
       {/* Time gutter */}
-      <div className="w-14 flex-shrink-0 border-r border-sage-200 bg-cream-100">
-        <div className="h-10 border-b border-sage-200" />
+      <div className="w-14 flex-shrink-0 border-r border-gray-200 bg-cream-100">
+        <div className="h-10 border-b border-gray-200" />
         <div className="relative" style={{ height: HOURS.length * ROW_H }}>
           {HOURS.map((h) => (
             <div
@@ -37,7 +37,7 @@ export default function DayGrid({ currentDate, actividades, selectedTipos, onAct
       {/* Day column */}
       <div className="flex-1 overflow-auto bg-white">
         {/* Day header */}
-        <div className="h-10 border-b-2 border-sage-300 flex items-center px-4 bg-sage-gradient sticky top-0 z-10">
+        <div className="h-10 border-b-2 border-gray-300 flex items-center px-4 bg-sage-gradient sticky top-0 z-10">
           <span className="heading-display text-base">
             {String(d).padStart(2, '0')}/{String(m).padStart(2, '0')}/{y}
           </span>
@@ -51,7 +51,7 @@ export default function DayGrid({ currentDate, actividades, selectedTipos, onAct
           {HOURS.map((h) => (
             <div
               key={h}
-              className="absolute left-0 right-0 border-t border-sage-100"
+              className="absolute left-0 right-0 border-t border-gray-100"
               style={{ top: (h - 7) * ROW_H }}
             />
           ))}

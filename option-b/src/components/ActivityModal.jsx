@@ -16,7 +16,7 @@ const DEFAULTS = {
   participantes: [],
 }
 
-const inputCls = "w-full border border-sage-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:border-sage-600 focus:ring-2 focus:ring-sage-200 transition"
+const inputCls = "w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:border-sage-600 focus:ring-2 focus:ring-sage-200 transition"
 
 export default function ActivityModal({ actividad, prefillDate, mode, onSave, onClose }) {
   const initial = actividad
@@ -54,12 +54,12 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
 
   return (
     <div className="fixed inset-0 bg-sage-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-cream-50 rounded-2xl shadow-2xl w-full max-w-lg my-4 overflow-hidden border border-sage-200">
+      <div className="bg-cream-50 rounded-2xl shadow-2xl w-full max-w-lg my-4 overflow-hidden border border-gray-200">
         {/* Cinta heráldica */}
         <div className="h-1 bg-gradient-to-r from-rioja-500 via-gold-400 to-rioja-500" />
 
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-sage-200 bg-sage-gradient">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-sage-gradient">
           <h2 className="heading-display text-xl">
             {mode === 'edit' ? 'Editar actividade' : 'Nova actividade'}
           </h2>
@@ -80,7 +80,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                   className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border-2 transition-colors ${
                     form.tipo === tipo
                       ? `${col.bg} text-white border-transparent shadow-sm`
-                      : 'bg-white text-sage-700 border-sage-300 hover:border-sage-500'
+                      : 'bg-white text-sage-700 border-gray-300 hover:border-sage-500'
                   }`}
                 >
                   <Icon name={col.icon} size={14} /> {col.label}
@@ -212,7 +212,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
           )}
 
           {/* Participants */}
-          <div className="pt-2 border-t border-sage-200">
+          <div className="pt-2 border-t border-gray-200">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-bold text-sage-800">
                 Participantes ({form.participantes.length})
@@ -228,7 +228,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
             {form.participantes.length > 0 && (
               <div className="space-y-1 mb-2">
                 {form.participantes.map((p, i) => (
-                  <div key={i} className="flex items-center bg-white border border-sage-200 rounded px-3 py-1.5 text-sm gap-2">
+                  <div key={i} className="flex items-center bg-white border border-gray-200 rounded px-3 py-1.5 text-sm gap-2">
                     <span className="font-semibold text-sage-800">{p.nombre}</span>
                     {p.parada && <span className="text-sage-500 text-xs truncate flex-1">· {p.parada}</span>}
                     <button
@@ -244,7 +244,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
             )}
 
             {showAddP && (
-              <div className="bg-sage-50 rounded-lg p-3 space-y-2 border border-sage-300">
+              <div className="bg-sage-50 rounded-lg p-3 space-y-2 border border-gray-300">
                 <div className="grid grid-cols-2 gap-2">
                   <input
                     value={newNombre}
@@ -275,8 +275,8 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
         </div>
 
         {/* Footer */}
-        <div className="flex justify-end gap-3 px-6 py-4 border-t border-sage-200 bg-cream-100">
-          <button onClick={onClose} className="px-4 py-2 rounded-lg border border-sage-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50">
+        <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-cream-100">
+          <button onClick={onClose} className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50">
             Cancelar
           </button>
           <button onClick={handleSave} className={`px-5 py-2 rounded-lg text-white text-sm font-semibold shadow-heraldic ${c.bg} hover:opacity-90`}>

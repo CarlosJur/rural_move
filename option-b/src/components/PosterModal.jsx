@@ -15,7 +15,7 @@ export default function PosterModal({ actividad, onClose }) {
       const canvas = await html2canvas(posterRef.current, {
         scale: 2,
         useCORS: true,
-        backgroundColor: '#FBF8F0',
+        backgroundColor: '#FFFFFF',
       })
       const link = document.createElement('a')
       link.download = `cartel-${actividad.concepto.replace(/\s+/g, '-').toLowerCase()}.png`
@@ -34,10 +34,10 @@ export default function PosterModal({ actividad, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-sage-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-cream-50 rounded-2xl shadow-2xl w-full max-w-2xl border border-sage-200 overflow-hidden">
+      <div className="bg-cream-50 rounded-2xl shadow-2xl w-full max-w-2xl border border-gray-200 overflow-hidden">
         <div className="h-1 bg-gradient-to-r from-rioja-500 via-gold-400 to-rioja-500" />
 
-        <div className="flex items-center justify-between px-6 py-4 border-b border-sage-200 bg-sage-gradient">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-sage-gradient">
           <h2 className="heading-display text-xl">Xerar cartel</h2>
           <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 transition-colors" title="Pechar"><Icon name="x" size={20} /></button>
         </div>
@@ -45,16 +45,16 @@ export default function PosterModal({ actividad, onClose }) {
         <div className="p-6 flex justify-center bg-cream-100">
           <div
             ref={posterRef}
-            className="w-[560px] bg-cream-50 rounded-xl overflow-hidden shadow-card-hover border border-sage-200"
+            className="w-[560px] bg-cream-50 rounded-xl overflow-hidden shadow-card-hover border border-gray-200"
             style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
           >
             {/* Cabecera heráldica del cartel */}
-            <div className="h-2" style={{ background: 'linear-gradient(90deg, #C8102E 0%, #CFA12E 50%, #C8102E 100%)' }} />
-            <div className="px-8 py-5 flex items-center gap-4 border-b border-sage-200" style={{ backgroundColor: '#E6EFE8' }}>
+            <div className="h-2" style={{ background: 'linear-gradient(90deg, #C8102E 0%, #4E61A3 50%, #C8102E 100%)' }} />
+            <div className="px-8 py-5 flex items-center gap-4 border-b border-gray-200" style={{ backgroundColor: '#D8E7F7' }}>
               <img src="/escudo-san-xoan.jpg" alt="" className="h-14 w-auto drop-shadow-sm" />
               <div className="flex-1 min-w-0">
                 <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: '#810A1E' }}>CONCELLO DE SAN XOÁN DE RÍO</p>
-                <p className="text-base italic font-bold mt-0.5" style={{ color: '#324740', fontFamily: 'Playfair Display, Georgia, serif' }}>
+                <p className="text-base italic font-bold mt-0.5" style={{ color: '#142F50', fontFamily: 'Playfair Display, Georgia, serif' }}>
                   Mobilidade rural · Axenda municipal
                 </p>
               </div>
@@ -94,9 +94,9 @@ export default function PosterModal({ actividad, onClose }) {
             </div>
 
             {/* Pie institucional */}
-            <div className="px-8 py-4 flex items-center justify-between border-t border-sage-200" style={{ backgroundColor: '#F5F0E2' }}>
+            <div className="px-8 py-4 flex items-center justify-between border-t border-gray-200" style={{ backgroundColor: '#F7F8F7' }}>
               <div>
-                <p className="text-[10px] font-bold tracking-[0.15em]" style={{ color: '#476356' }}>CONCELLO DE SAN XOÁN DE RÍO</p>
+                <p className="text-[10px] font-bold tracking-[0.15em]" style={{ color: '#1A4170' }}>CONCELLO DE SAN XOÁN DE RÍO</p>
                 <p className="italic mt-0.5" style={{ color: '#C8102E', fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '18px', lineHeight: 1 }}>
                   Todos os camiños levan a San Xoán de Río
                 </p>
@@ -106,8 +106,8 @@ export default function PosterModal({ actividad, onClose }) {
           </div>
         </div>
 
-        <div className="flex justify-end gap-3 px-6 py-4 border-t border-sage-200 bg-cream-100">
-          <button onClick={onClose} className="px-4 py-2 rounded-lg border border-sage-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50">
+        <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-cream-100">
+          <button onClick={onClose} className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50">
             Pechar
           </button>
           <button

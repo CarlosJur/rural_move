@@ -41,7 +41,7 @@ export default function Toolbar({
   }, [filterOpen])
 
   return (
-    <div className="flex items-center justify-between h-14 px-4 border-b border-sage-200 bg-cream-50 shadow-sm flex-shrink-0 gap-2 flex-wrap">
+    <div className="flex items-center justify-between h-14 px-4 border-b border-gray-200 bg-cream-50 shadow-sm flex-shrink-0 gap-2 flex-wrap">
       {/* Left group */}
       <div className="flex items-center gap-2">
         <button
@@ -53,20 +53,20 @@ export default function Toolbar({
         </button>
         <button
           onClick={onToday}
-          className="px-3 py-1.5 border border-sage-300 rounded-lg text-sm font-semibold text-sage-800 bg-white hover:bg-sage-50 transition-colors"
+          className="px-3 py-1.5 border border-gray-300 rounded-lg text-sm font-semibold text-sage-800 bg-white hover:bg-sage-50 transition-colors"
         >
           Hoxe
         </button>
         <div className="flex">
           <button
             onClick={onPrev}
-            className="px-2 py-1.5 border border-sage-300 rounded-l-lg text-sage-700 bg-white hover:bg-sage-50 transition-colors"
+            className="px-2 py-1.5 border border-gray-300 rounded-l-lg text-sage-700 bg-white hover:bg-sage-50 transition-colors"
           >
             <Icon name="chevron-left" size={16} />
           </button>
           <button
             onClick={onNext}
-            className="px-2 py-1.5 border border-r border-t border-b border-sage-300 rounded-r-lg text-sage-700 bg-white hover:bg-sage-50 transition-colors"
+            className="px-2 py-1.5 border border-r border-t border-b border-gray-300 rounded-r-lg text-sage-700 bg-white hover:bg-sage-50 transition-colors"
           >
             <Icon name="chevron-right" size={16} />
           </button>
@@ -77,7 +77,7 @@ export default function Toolbar({
       </div>
 
       {/* Center: view toggle */}
-      <div className="flex border border-sage-300 rounded-lg overflow-hidden bg-white">
+      <div className="flex border border-gray-300 rounded-lg overflow-hidden bg-white">
         {[['month', 'Mes'], ['week', 'Semana'], ['day', 'Día']].map(([mode, label]) => (
           <button
             key={mode}
@@ -101,8 +101,8 @@ export default function Toolbar({
             onClick={() => setFilterOpen((v) => !v)}
             className={`flex items-center gap-1.5 text-sm font-semibold px-3 py-1.5 rounded-lg border transition-colors ${
               filterOpen
-                ? 'bg-sage-100 border-sage-400 text-sage-800'
-                : 'bg-white border-sage-300 text-sage-700 hover:bg-sage-50'
+                ? 'bg-gray-100 border-gray-400 text-sage-800'
+                : 'bg-white border-gray-300 text-sage-700 hover:bg-sage-50'
             }`}
           >
             <Icon name="filter" size={15} /> Filtrar
@@ -115,8 +115,8 @@ export default function Toolbar({
           </button>
 
           {filterOpen && (
-            <div className="absolute right-0 mt-2 w-60 bg-white border border-sage-200 rounded-xl shadow-card-hover z-50 overflow-hidden">
-              <div className="flex items-center justify-between px-3 py-2 border-b border-sage-100 bg-cream-50">
+            <div className="absolute right-0 mt-2 w-60 bg-white border border-gray-200 rounded-xl shadow-card-hover z-50 overflow-hidden">
+              <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100 bg-cream-50">
                 <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-sage-600">Tipos de actividade</span>
                 <button
                   onClick={() => tipos.forEach(([tipo]) => {
@@ -139,7 +139,7 @@ export default function Toolbar({
                     >
                       <span
                         className={`flex items-center justify-center w-4 h-4 rounded border transition-colors ${
-                          active ? `${c.bg} border-transparent text-white` : 'bg-white border-sage-300 text-transparent'
+                          active ? `${c.bg} border-transparent text-white` : 'bg-white border-gray-300 text-transparent'
                         }`}
                       >
                         <Icon name="check" size={12} strokeWidth={3} />
@@ -154,7 +154,7 @@ export default function Toolbar({
           )}
         </div>
 
-        <div className="w-px h-5 bg-sage-300 mx-1" />
+        <div className="w-px h-5 bg-gray-300 mx-1" />
 
         <button
           onClick={onNuevaActividad}
