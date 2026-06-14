@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { TIPO_COLORS, getEstado } from '../data/mockData'
 import { formatFecha } from '../utils/dateUtils'
-import { exportarTodas } from '../utils/exportXLSX'
+import { exportarActividades } from '../utils/exportXLSX'
 import Icon from './Icon'
 
 const ESTADO_STYLE = {
@@ -19,21 +19,26 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
   const [selectedIds, setSelectedIds] = useState(new Set())
   const [expandedId, setExpandedId] = useState(null)
   const [filterOpen, setFilterOpen] = useState(false)
+  const [exportOpen, setExportOpen] = useState(false)
   const filterRef = useRef(null)
+  const exportRef = useRef(null)
 
   useEffect(() => {
-    if (!filterOpen) return
+    if (!filterOpen && !exportOpen) return
     const handleClick = (e) => {
       if (filterRef.current && !filterRef.current.contains(e.target)) setFilterOpen(false)
+      if (exportRef.current && !exportRef.current.contains(e.target)) setExportOpen(false)
     }
-    const handleKey = (e) => e.key === 'Escape' && setFilterOpen(false)
+    const handleKey = (e) => {
+      if (e.key === 'Escape') { setFilterOpen(false); setExportOpen(false) }
+    }
     document.addEventListener('mousedown', handleClick)
     document.addEventListener('keydown', handleKey)
     return () => {
       document.removeEventListener('mousedown', handleClick)
       document.removeEventListener('keydown', handleKey)
     }
-  }, [filterOpen])
+  }, [filterOpen, exportOpen])
 
   const toggleTipo = (tipo) =>
     setSelectedTipos((prev) =>
@@ -169,12 +174,47 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
             >
               <Icon name="image" size={15} /> Xerar cartel{selectedActividades.length > 1 ? ` (${selectedActividades.length})` : ''}
             </button>
-            <button
-              onClick={() => exportarTodas(actividades)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sage-700 hover:bg-sage-800 text-white text-sm font-semibold transition-colors"
-            >
-              <Icon name="download" size={15} /> XLSX
-            </button>
+            {/* Export dropdown */}
+            <div className="relative" ref={exportRef}>
+              <button
+                onClick={() => setExportOpen((v) => !v)}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                  exportOpen
+                    ? 'bg-sage-800 text-white'
+                    : 'bg-sage-700 hover:bg-sage-800 text-white'
+                }`}
+              >
+                <Icon name="download" size={15} /> XLSX
+                <Icon name="chevron-down" size={13} className={`transition-transform ${exportOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {exportOpen && (
+                <div className="absolute right-0 mt-2 w-56 bg-white border border-sage-200 rounded-xl shadow-card-hover z-50 overflow-hidden">
+                  <div className="px-3 py-2 border-b border-sage-100 bg-cream-50">
+                    <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-sage-600">Exportar XLSX</span>
+                  </div>
+                  <div className="py-1">
+                    <button
+                      onClick={() => { exportarActividades(actividades, 'actividades'); setExportOpen(false) }}
+                      className="flex items-center gap-2 w-full px-3 py-2 text-sm text-sage-800 hover:bg-sage-50 transition-colors"
+                    >
+                      <Icon name="download" size={14} className="text-sage-500" />
+                      <span className="font-medium">Exportar todo</span>
+                      <span className="ml-auto text-[11px] text-sage-400">{actividades.length}</span>
+                    </button>
+                    <button
+                      onClick={() => { exportarActividades(selectedActividades, 'seleccion'); setExportOpen(false) }}
+                      disabled={selectedActividades.length === 0}
+                      className="flex items-center gap-2 w-full px-3 py-2 text-sm text-sage-800 hover:bg-sage-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      <Icon name="check" size={14} className="text-sage-500" />
+                      <span className="font-medium">Exportar selección</span>
+                      <span className="ml-auto text-[11px] text-sage-400">{selectedActividades.length}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
             <button
               onClick={onAdd}
               className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-rioja-500 hover:bg-rioja-600 text-white text-sm font-semibold shadow-heraldic transition-colors"
