@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { actividades as mockActividades } from './data/mockData'
 import { exportarTodas } from './utils/exportXLSX'
 import { MESES } from './utils/dateUtils'
+import Header from './components/Brand'
 import Toolbar from './components/Toolbar'
 import SidePanel from './components/SidePanel'
 import MonthGrid from './components/MonthGrid'
@@ -20,13 +21,12 @@ export default function App() {
   const [selectedTipos, setSelectedTipos] = useState(['autobus', 'voluntariado', 'asociacion'])
   const [modalState, setModalState] = useState({
     open: false,
-    mode: 'add', // 'add' | 'edit'
+    mode: 'add',
     actividad: null,
     prefillDate: null,
   })
   const [posterTarget, setPosterTarget] = useState(null)
 
-  // CRUD
   const addActividad = (data) =>
     setActividades((prev) => [...prev, { ...data, id: Date.now(), participantes: data.participantes || [] }])
 
@@ -36,7 +36,6 @@ export default function App() {
   const deleteActividad = (id) =>
     setActividades((prev) => prev.filter((a) => a.id !== id))
 
-  // Modal helpers
   const openAdd = (prefillDate = null) =>
     setModalState({ open: true, mode: 'add', actividad: null, prefillDate })
 
@@ -58,7 +57,6 @@ export default function App() {
     closeModal()
   }
 
-  // Date navigation
   const navigate = (delta) => {
     const d = new Date(currentDate)
     if (viewMode === 'month') d.setMonth(d.getMonth() + delta)
@@ -69,14 +67,16 @@ export default function App() {
 
   const goToday = () => setCurrentDate(new Date())
 
-  // Tipo toggle
   const toggleTipo = (tipo) =>
     setSelectedTipos((prev) =>
       prev.includes(tipo) ? prev.filter((t) => t !== tipo) : [...prev, tipo]
     )
 
   return (
-    <div className="flex flex-col h-screen bg-white overflow-hidden">
+    <div className="flex flex-col h-screen bg-cream-50 overflow-hidden">
+      {/* Cabeceira institucional */}
+      <Header />
+
       {/* Toolbar */}
       <Toolbar
         currentDate={currentDate}
@@ -94,7 +94,6 @@ export default function App() {
 
       {/* Main area */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Side panel */}
         <SidePanel
           open={sidePanelOpen}
           actividades={actividades}
@@ -104,21 +103,18 @@ export default function App() {
           onNueva={() => openAdd()}
         />
 
-        {/* Calendar area */}
         <div className="flex flex-col flex-1 overflow-hidden">
-          {/* Month nav header (for month view only) */}
           {viewMode === 'month' && (
-            <div className="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-slate-50 flex-shrink-0">
-              <h2 className="text-base font-semibold text-slate-700">
-                {MESES[currentDate.getMonth()]} {currentDate.getFullYear()}
+            <div className="flex items-center justify-between px-4 py-2 border-b border-sage-200 bg-cream-100 flex-shrink-0">
+              <h2 className="heading-display text-base">
+                {MESES[currentDate.getMonth()]} <span className="text-rioja-500 not-italic font-bold">{currentDate.getFullYear()}</span>
               </h2>
-              <div className="flex items-center gap-2 text-xs text-slate-500">
+              <div className="flex items-center gap-2 text-xs text-sage-600 font-medium">
                 <span>{actividades.filter((a) => selectedTipos.includes(a.tipo)).length} actividades visibles</span>
               </div>
             </div>
           )}
 
-          {/* Calendar view */}
           {viewMode === 'month' && (
             <MonthGrid
               currentDate={currentDate}
@@ -148,7 +144,26 @@ export default function App() {
         </div>
       </div>
 
-      {/* Activity modal */}
+      {/* Footer institucional */}
+      <footer className="flex-shrink-0 border-t-2 border-sage-300 bg-sage-gradient">
+        <div className="h-0.5 bg-gradient-to-r from-rioja-500 via-gold-400 to-rioja-500" />
+        <div className="flex items-center justify-between px-6 py-2 gap-4">
+          <div className="flex items-center gap-2 text-[10px] text-sage-700">
+            <img src="/escudo-san-xoan.jpg" alt="" className="h-6 w-auto mix-blend-multiply" />
+            <span className="font-bold tracking-[0.12em] uppercase">Concello de San Xoán de Río</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-rioja-500" style={{ fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '14px' }}>
+              Rural
+            </span>
+            <span className="text-rioja-500" style={{ fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '14px' }}>
+              move
+            </span>
+            <span className="text-[10px] text-sage-600 italic ml-2">© {new Date().getFullYear()}</span>
+          </div>
+        </div>
+      </footer>
+
       {modalState.open && (
         <ActivityModal
           actividad={modalState.actividad}
@@ -159,7 +174,6 @@ export default function App() {
         />
       )}
 
-      {/* Poster modal */}
       {posterTarget && (
         <PosterModal actividad={posterTarget} onClose={() => setPosterTarget(null)} />
       )}

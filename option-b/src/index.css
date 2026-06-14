@@ -2,6 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
+@layer base {
+  html, body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: theme('colors.ink');
+    background: theme('colors.cream.50');
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  * { box-sizing: border-box; }
+}
+
+@layer components {
+  .wordmark-rural {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: theme('colors.ink');
+  }
+  .wordmark-move {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    color: theme('colors.rioja.500');
+    letter-spacing: -0.01em;
+  }
+  .heading-display {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    color: theme('colors.sage.800');
+  }
+  /* Scrollbar discreto en tema sage */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: theme('colors.cream.50'); }
+  ::-webkit-scrollbar-thumb { background: theme('colors.sage.300'); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: theme('colors.sage.500'); }
 }

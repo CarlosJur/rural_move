@@ -31,11 +31,11 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
     d === today.getDate() && month === today.getMonth() && year === today.getFullYear()
 
   return (
-    <div className="flex flex-col flex-1 overflow-hidden">
+    <div className="flex flex-col flex-1 overflow-hidden bg-cream-50">
       {/* Day headers */}
-      <div className="grid grid-cols-7 border-b border-slate-200 flex-shrink-0 bg-white">
+      <div className="grid grid-cols-7 border-b-2 border-sage-300 flex-shrink-0 bg-sage-gradient">
         {DIAS_SEMANA_SHORT.map((d) => (
-          <div key={d} className="text-center text-xs font-semibold text-slate-500 py-2 border-r border-slate-100 last:border-r-0">
+          <div key={d} className="text-center text-xs font-bold uppercase tracking-[0.15em] text-sage-800 py-2.5 border-r border-sage-200 last:border-r-0">
             {d}
           </div>
         ))}
@@ -53,12 +53,12 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
             <div
               key={idx}
               onClick={() => day && onDayClick(iso)}
-              className={`group relative min-h-[100px] border-b border-r border-slate-100 last:border-r-0 p-1 transition-colors ${
+              className={`group relative min-h-[100px] border-b border-r border-sage-200 last:border-r-0 p-1.5 transition-colors ${
                 day
                   ? isToday(day)
-                    ? 'bg-blue-50 hover:bg-blue-100'
-                    : 'bg-white hover:bg-slate-50 cursor-pointer'
-                  : 'bg-slate-50/50'
+                    ? 'bg-rioja-50 hover:bg-rioja-100'
+                    : 'bg-white hover:bg-sage-50 cursor-pointer'
+                  : 'bg-cream-100/60'
               }`}
             >
               {day && (
@@ -66,10 +66,10 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
                   {/* Day number */}
                   <div className="flex items-center justify-between">
                     <span
-                      className={`text-xs font-semibold w-6 h-6 flex items-center justify-center rounded-full ${
+                      className={`text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full transition-colors ${
                         isToday(day)
-                          ? 'bg-blue-600 text-white'
-                          : 'text-slate-700'
+                          ? 'bg-rioja-500 text-white shadow-heraldic'
+                          : 'text-sage-800'
                       }`}
                     >
                       {day}
@@ -77,19 +77,19 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
                     {/* + button on hover */}
                     <button
                       onClick={(e) => { e.stopPropagation(); onDayClick(iso) }}
-                      className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-blue-600 text-sm transition-opacity leading-none"
+                      className="opacity-0 group-hover:opacity-100 text-sage-400 hover:text-rioja-500 text-sm transition-opacity leading-none font-bold"
                     >
                       +
                     </button>
                   </div>
 
                   {/* Activity chips */}
-                  <div className="mt-0.5 space-y-0.5">
+                  <div className="mt-1 space-y-0.5">
                     {visible.map((a) => (
                       <div
                         key={a.id}
                         onClick={(e) => { e.stopPropagation(); onActivityClick(a) }}
-                        className="text-[11px] truncate rounded px-1 py-0.5 text-white font-medium cursor-pointer hover:opacity-90 transition-opacity"
+                        className="text-[11px] truncate rounded px-1.5 py-0.5 text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity shadow-sm"
                         style={{ backgroundColor: TIPO_COLORS[a.tipo].dot }}
                         title={a.concepto}
                       >
@@ -99,9 +99,9 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
                     {extra > 0 && (
                       <div
                         onClick={(e) => { e.stopPropagation(); onDayClick(iso) }}
-                        className="text-[10px] text-slate-500 hover:text-slate-700 cursor-pointer pl-1"
+                        className="text-[10px] text-sage-600 hover:text-sage-800 cursor-pointer pl-1 font-semibold"
                       >
-                        +{extra} más
+                        +{extra} máis
                       </div>
                     )}
                   </div>
