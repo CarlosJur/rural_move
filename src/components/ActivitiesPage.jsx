@@ -92,7 +92,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
           <div>
             <h1 className="heading-display text-2xl">Actividades</h1>
             <p className="text-xs text-sage-600 mt-0.5">
-              Xestión de rutas, voluntariado e asociacións · {actividades.length} rexistros
+              Gestión de rutas, voluntariado y asociaciones · {actividades.length} registros
             </p>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
@@ -123,7 +123,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                 <div className="absolute right-0 mt-2 w-60 bg-white border border-sage-200 rounded-xl shadow-card-hover z-50 overflow-hidden">
                   <div className="flex items-center justify-between px-3 py-2 border-b border-sage-100 bg-cream-50">
                     <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-sage-600">
-                      Tipos de actividade
+                      Tipos de actividad
                     </span>
                     <button
                       onClick={() =>
@@ -131,7 +131,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                       }
                       className="text-[11px] font-semibold text-rioja-500 hover:text-rioja-700"
                     >
-                      {allActive ? 'Ningún' : 'Todos'}
+                      {allActive ? 'Ninguno' : 'Todos'}
                     </button>
                   </div>
                   <div className="py-1">
@@ -170,9 +170,9 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
               onClick={() => selectedActividades.length > 0 && onGenerarCartel(selectedActividades)}
               disabled={selectedActividades.length === 0}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-sage-300 bg-white text-sage-700 text-sm font-semibold disabled:opacity-40 hover:bg-sage-50 transition-colors"
-              title={selectedActividades.length === 0 ? 'Selecciona actividades para xerar o cartel' : `Xerar cartel para ${selectedActividades.length} actividade(s)`}
+              title={selectedActividades.length === 0 ? 'Selecciona actividades para generar el cartel' : `Generar cartel para ${selectedActividades.length} actividad(es)`}
             >
-              <Icon name="image" size={15} /> Xerar cartel{selectedActividades.length > 1 ? ` (${selectedActividades.length})` : ''}
+              <Icon name="image" size={15} /> Generar cartel{selectedActividades.length > 1 ? ` (${selectedActividades.length})` : ''}
             </button>
             {/* Export dropdown */}
             <div className="relative" ref={exportRef}>
@@ -219,7 +219,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
               onClick={onAdd}
               className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-rioja-500 hover:bg-rioja-600 text-white text-sm font-semibold shadow-heraldic transition-colors"
             >
-              <Icon name="plus" size={15} /> Nova
+              <Icon name="plus" size={15} /> Nueva
             </button>
           </div>
         </div>
@@ -250,25 +250,25 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                   Concepto
                 </th>
                 <th className="text-left text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em] px-4 py-2.5 whitespace-nowrap">
-                  Data
+                  Fecha
                 </th>
                 <th className="text-left text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em] px-4 py-2.5 whitespace-nowrap">
-                  Hora saída
+                  Hora salida
                 </th>
                 <th className="text-left text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em] px-4 py-2.5 whitespace-nowrap">
-                  Hora volta
+                  Hora vuelta
                 </th>
                 <th className="text-left text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em] px-4 py-2.5 whitespace-nowrap">
-                  Persoal
+                  Personal
                 </th>
                 <th className="text-left text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em] px-4 py-2.5 whitespace-nowrap">
-                  Prazas
+                  Plazas
                 </th>
                 <th className="text-left text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em] px-4 py-2.5 whitespace-nowrap">
                   Estado
                 </th>
                 <th className="text-right px-4 py-2.5 text-[11px] font-bold text-sage-600 uppercase tracking-[0.1em]">
-                  Accións
+                  Acciones
                 </th>
               </tr>
             </thead>
@@ -276,7 +276,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
               {filtered.length === 0 && (
                 <tr>
                   <td colSpan={11} className="text-center text-sage-400 py-12 text-sm italic">
-                    Sen actividades. Cambia o filtro ou preme «Nova» para crear unha.
+                    Sin actividades. Cambia el filtro o pulsa «Nueva» para crear una.
                   </td>
                 </tr>
               )}
@@ -361,7 +361,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                             </span>
                             {a.tipo === 'voluntariado' && a.participantes.length < 2 && (
                               <span className="inline-flex items-center gap-1 text-[10px] bg-gold-100 text-gold-700 px-1.5 py-0.5 rounded-full font-semibold">
-                                <Icon name="alert" size={10} /> Poucos
+                                <Icon name="alert" size={10} /> Pocos
                               </span>
                             )}
                           </div>
@@ -393,7 +393,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                             Participantes inscritos ({a.participantes.length})
                           </p>
                           {a.participantes.length === 0 ? (
-                            <p className="text-xs text-sage-400 italic">Sen inscricións aínda.</p>
+                            <p className="text-xs text-sage-400 italic">Sin inscripciones aún.</p>
                           ) : (
                             <div className="flex flex-wrap gap-2">
                               {a.participantes.map((p, i) => (
@@ -424,7 +424,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
               ? <>Seleccionada: <span className="font-semibold text-rioja-600">{selectedActividades[0].concepto}</span></>
               : <><span className="font-semibold text-rioja-600">{selectedActividades.length} actividades</span> seleccionadas</>
             }
-            {' '}— preme «Xerar cartel» para continuar.
+            {' '}— pulsa «Generar cartel» para continuar.
           </p>
         )}
       </div>

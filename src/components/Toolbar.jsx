@@ -55,7 +55,7 @@ export default function Toolbar({
           onClick={onToday}
           className="px-3 py-1.5 border border-sage-300 rounded-lg text-sm font-semibold text-sage-800 bg-white hover:bg-sage-50 transition-colors"
         >
-          Hoxe
+          Hoy
         </button>
         <div className="flex">
           <button
@@ -117,7 +117,7 @@ export default function Toolbar({
           {filterOpen && (
             <div className="absolute right-0 mt-2 w-60 bg-white border border-sage-200 rounded-xl shadow-card-hover z-50 overflow-hidden">
               <div className="flex items-center justify-between px-3 py-2 border-b border-sage-100 bg-cream-50">
-                <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-sage-600">Tipos de actividade</span>
+                <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-sage-600">Tipos de actividad</span>
                 <button
                   onClick={() => tipos.forEach(([tipo]) => {
                     const active = selectedTipos.includes(tipo)
@@ -125,7 +125,7 @@ export default function Toolbar({
                   })}
                   className="text-[11px] font-semibold text-rioja-500 hover:text-rioja-700"
                 >
-                  {allActive ? 'Ningún' : 'Todos'}
+                  {allActive ? 'Ninguno' : 'Todos'}
                 </button>
               </div>
               <div className="py-1">
@@ -160,7 +160,7 @@ export default function Toolbar({
           onClick={onNuevaActividad}
           className="flex items-center gap-1.5 bg-rioja-500 hover:bg-rioja-600 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors shadow-heraldic"
         >
-          <Icon name="plus" size={15} /> Nova
+          <Icon name="plus" size={15} /> Nueva
         </button>
         <button
           onClick={onExportXLSX}

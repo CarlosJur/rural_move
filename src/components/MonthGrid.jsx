@@ -101,7 +101,7 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
                         onClick={(e) => { e.stopPropagation(); onDayClick(iso) }}
                         className="text-[10px] text-sage-600 hover:text-sage-800 cursor-pointer pl-1 font-semibold"
                       >
-                        +{extra} máis
+                        +{extra} más
                       </div>
                     )}
                   </div>

@@ -8,6 +8,11 @@ dist/
 *.log
 npm-debug.log*
 
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
 # Sistema
 .DS_Store
 Thumbs.db

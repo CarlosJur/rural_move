@@ -36,7 +36,7 @@ export default function PosterModal({ actividades, onClose }) {
       const { default: html2canvas } = await import('html2canvas')
       const canvas = await html2canvas(combinedRef.current, { scale: 2, useCORS: true, backgroundColor: '#FBF8F0' })
       const link = document.createElement('a')
-      link.download = 'cartel-conxunto.png'
+      link.download = 'cartel-conjunto.png'
       link.href = canvas.toDataURL('image/png')
       link.click()
     } finally {
@@ -50,13 +50,13 @@ export default function PosterModal({ actividades, onClose }) {
   }
 
   const downloadLabel = () => {
-    if (downloading) return 'Xerando...'
+    if (downloading) return 'Generando...'
     if (!isMulti || mode === 'individual') {
       return actividades.length === 1
-        ? <><Icon name="download" size={15} /> Descargar como imaxe</>
-        : <><Icon name="download" size={15} /> Descargar {actividades.length} carteis</>
+        ? <><Icon name="download" size={15} /> Descargar como imagen</>
+        : <><Icon name="download" size={15} /> Descargar {actividades.length} carteles</>
     }
-    return <><Icon name="download" size={15} /> Descargar cartel conxunto</>
+    return <><Icon name="download" size={15} /> Descargar cartel conjunto</>
   }
 
   return (
@@ -66,9 +66,9 @@ export default function PosterModal({ actividades, onClose }) {
 
         <div className="flex items-center justify-between px-6 py-4 border-b border-sage-200 bg-sage-gradient">
           <h2 className="heading-display text-xl">
-            {isMulti ? `Xerar carteis (${actividades.length} seleccionados)` : 'Xerar cartel'}
+            {isMulti ? `Generar carteles (${actividades.length} seleccionados)` : 'Generar cartel'}
           </h2>
-          <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 transition-colors" title="Pechar">
+          <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 transition-colors" title="Cerrar">
             <Icon name="x" size={20} />
           </button>
         </div>
@@ -86,8 +86,8 @@ export default function PosterModal({ actividades, onClose }) {
                 onChange={() => setMode('individual')}
                 className="accent-rioja-500"
               />
-              <span className="text-sm font-semibold text-sage-800">Carteis individuais</span>
-              <span className="text-xs text-sage-400">(un ficheiro por actividade)</span>
+              <span className="text-sm font-semibold text-sage-800">Carteles individuales</span>
+              <span className="text-xs text-sage-400">(un fichero por actividad)</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
               <input
@@ -98,7 +98,7 @@ export default function PosterModal({ actividades, onClose }) {
                 onChange={() => setMode('conjunto')}
                 className="accent-rioja-500"
               />
-              <span className="text-sm font-semibold text-sage-800">Cartel conxunto</span>
+              <span className="text-sm font-semibold text-sage-800">Cartel conjunto</span>
               <span className="text-xs text-sage-400">(un único cartel)</span>
             </label>
           </div>
@@ -124,7 +124,7 @@ export default function PosterModal({ actividades, onClose }) {
 
         <div className="flex justify-end gap-3 px-6 py-4 border-t border-sage-200 bg-cream-100">
           <button onClick={onClose} className="px-4 py-2 rounded-lg border border-sage-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50">
-            Pechar
+            Cerrar
           </button>
           <button
             onClick={handleDescargar}
@@ -158,9 +158,9 @@ const SinglePoster = forwardRef(function SinglePoster({ actividad }, ref) {
       <div className="px-8 py-5 flex items-center gap-4 border-b border-sage-200" style={{ backgroundColor: '#E6EFE8' }}>
         <img src="/escudo-san-xoan.jpg" alt="" className="h-14 w-auto drop-shadow-sm" />
         <div className="flex-1 min-w-0">
-          <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: '#810A1E' }}>CONCELLO DE SAN XOÁN DE RÍO</p>
+          <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: '#810A1E' }}>AYUNTAMIENTO DE SAN XOÁN DE RÍO</p>
           <p className="text-base italic font-bold mt-0.5" style={{ color: '#324740', fontFamily: 'Playfair Display, Georgia, serif' }}>
-            Mobilidade rural · Axenda municipal
+            Movilidad rural · Agenda municipal
           </p>
         </div>
         <div className="flex flex-col items-end leading-none">
@@ -184,33 +184,33 @@ const SinglePoster = forwardRef(function SinglePoster({ actividad }, ref) {
           <InfoRow icon="calendar" label="Data" value={formatFecha(actividad.fecha)} />
           <InfoRow
             icon="clock"
-            label={actividad.horaVuelta ? 'Hora saída' : 'Hora'}
+            label={actividad.horaVuelta ? 'Hora salida' : 'Hora'}
             value={actividad.hora}
           />
         </div>
         {actividad.horaVuelta && (
-          <InfoRow icon="corner-down-left" label="Hora volta" value={actividad.horaVuelta} />
+          <InfoRow icon="corner-down-left" label="Hora vuelta" value={actividad.horaVuelta} />
         )}
         {conductor && (
           <InfoRow
             icon="user"
-            label={actividad.conductor ? 'Condutor' : actividad.voluntario != null ? 'Voluntario condutor' : 'Responsable'}
+            label={actividad.conductor ? 'Conductor' : actividad.voluntario != null ? 'Voluntario conductor' : 'Responsable'}
             value={conductor}
           />
         )}
         {actividad.lugar && <InfoRow icon="map-pin" label="Lugar" value={actividad.lugar} />}
         {actividad.asociacion && <InfoRow icon="home" label="Asociación" value={actividad.asociacion} />}
         {actividad.plazas != null && (
-          <InfoRow icon="users" label="Prazas ofertadas" value={String(actividad.plazas)} />
+          <InfoRow icon="users" label="Plazas ofertadas" value={String(actividad.plazas)} />
         )}
       </div>
 
       {/* Pé institucional */}
       <div className="px-8 py-4 flex items-center justify-between border-t border-sage-200" style={{ backgroundColor: '#F5F0E2' }}>
         <div>
-          <p className="text-[10px] font-bold tracking-[0.15em]" style={{ color: '#476356' }}>CONCELLO DE SAN XOÁN DE RÍO</p>
+          <p className="text-[10px] font-bold tracking-[0.15em]" style={{ color: '#476356' }}>AYUNTAMIENTO DE SAN XOÁN DE RÍO</p>
           <p className="italic mt-0.5" style={{ color: '#C8102E', fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '18px', lineHeight: 1 }}>
-            Todos os camiños levan a San Xoán de Río
+            Todos los caminos llevan a San Xoán de Río
           </p>
         </div>
         <img src="/escudo-san-xoan.jpg" alt="" className="h-12 w-auto opacity-90" />
@@ -237,9 +237,9 @@ const CombinedPoster = forwardRef(function CombinedPoster({ actividades }, ref) 
       <div className="px-8 py-5 flex items-center gap-4 border-b border-sage-200" style={{ backgroundColor: '#E6EFE8' }}>
         <img src="/escudo-san-xoan.jpg" alt="" className="h-14 w-auto drop-shadow-sm" />
         <div className="flex-1 min-w-0">
-          <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: '#810A1E' }}>CONCELLO DE SAN XOÁN DE RÍO</p>
+          <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: '#810A1E' }}>AYUNTAMIENTO DE SAN XOÁN DE RÍO</p>
           <p className="text-base italic font-bold mt-0.5" style={{ color: '#324740', fontFamily: 'Playfair Display, Georgia, serif' }}>
-            Mobilidade rural · Axenda municipal
+            Movilidad rural · Agenda municipal
           </p>
         </div>
         <div className="flex flex-col items-end leading-none">
@@ -276,7 +276,7 @@ const CombinedPoster = forwardRef(function CombinedPoster({ actividades }, ref) 
                   <Icon name="clock" size={11} /> {a.hora}{a.horaVuelta ? ` → ${a.horaVuelta}` : ''}
                 </span>
                 {a.plazas != null && (
-                  <span className="inline-flex items-center gap-1"><Icon name="users" size={11} /> {a.plazas} prazas</span>
+                  <span className="inline-flex items-center gap-1"><Icon name="users" size={11} /> {a.plazas} plazas</span>
                 )}
                 {a.lugar && (
                   <span className="inline-flex items-center gap-1"><Icon name="map-pin" size={11} /> {a.lugar}</span>
@@ -290,9 +290,9 @@ const CombinedPoster = forwardRef(function CombinedPoster({ actividades }, ref) 
       {/* Pé institucional */}
       <div className="px-8 py-4 flex items-center justify-between border-t border-sage-200" style={{ backgroundColor: '#F5F0E2' }}>
         <div>
-          <p className="text-[10px] font-bold tracking-[0.15em]" style={{ color: '#476356' }}>CONCELLO DE SAN XOÁN DE RÍO</p>
+          <p className="text-[10px] font-bold tracking-[0.15em]" style={{ color: '#476356' }}>AYUNTAMIENTO DE SAN XOÁN DE RÍO</p>
           <p className="italic mt-0.5" style={{ color: '#C8102E', fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '18px', lineHeight: 1 }}>
-            Todos os camiños levan a San Xoán de Río
+            Todos los caminos llevan a San Xoán de Río
           </p>
         </div>
         <img src="/escudo-san-xoan.jpg" alt="" className="h-12 w-auto opacity-90" />

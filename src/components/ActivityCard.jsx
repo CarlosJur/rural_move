@@ -48,7 +48,7 @@ export default function ActivityCard({ actividad, onEdit, onDelete, onAddPartici
         <button
           onClick={onAddParticipant}
           className="inline-flex items-center gap-1 text-xs text-laurel-600 hover:text-laurel-800 font-semibold transition-colors"
-          title="Engadir participante"
+          title="Añadir participante"
         >
           <Icon name="user-plus" size={13} /> Participante
         </button>

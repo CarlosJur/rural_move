@@ -62,16 +62,16 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-sage-200 bg-sage-gradient">
           <h2 className="heading-display text-xl">
-            {mode === 'edit' ? 'Editar actividade' : 'Nova actividade'}
+            {mode === 'edit' ? 'Editar actividad' : 'Nueva actividad'}
           </h2>
-          <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 transition-colors" title="Pechar"><Icon name="x" size={20} /></button>
+          <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 transition-colors" title="Cerrar"><Icon name="x" size={20} /></button>
         </div>
 
         <div className="px-6 py-4 space-y-4 max-h-[70vh] overflow-y-auto bg-cream-50">
           {/* Tipo selector */}
           <div>
             <label className="block text-[10px] font-bold text-sage-700 mb-2 uppercase tracking-[0.15em]">
-              Tipo de actividade
+              Tipo de actividad
             </label>
             <div className="flex gap-2 flex-wrap">
               {Object.entries(TIPO_COLORS).map(([tipo, col]) => (
@@ -94,13 +94,13 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
             <input
               value={form.concepto}
               onChange={(e) => set('concepto', e.target.value)}
-              placeholder="Nome da actividade"
+              placeholder="Nombre de la actividad"
               className={inputCls}
             />
           </Field>
 
           <div className="grid grid-cols-2 gap-3">
-            <Field label="Data *">
+            <Field label="Fecha *">
               <input
                 type="date"
                 value={form.fecha}
@@ -108,7 +108,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                 className={inputCls}
               />
             </Field>
-            <Field label={form.tipo === 'asociacion' ? 'Hora *' : 'Hora saída *'}>
+            <Field label={form.tipo === 'asociacion' ? 'Hora *' : 'Hora salida *'}>
               <input
                 type="time"
                 value={form.hora}
@@ -119,7 +119,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
           </div>
 
           {(form.tipo === 'autobus' || form.tipo === 'voluntariado') && (
-            <Field label="Hora volta (opcional)">
+            <Field label="Hora vuelta (opcional)">
               <input
                 type="time"
                 value={form.horaVuelta || ''}
@@ -133,15 +133,15 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
           {form.tipo === 'autobus' && (
             <>
               <div className="grid grid-cols-2 gap-3">
-                <Field label="Condutor">
+                <Field label="Conductor">
                   <input
                     value={form.conductor}
                     onChange={(e) => set('conductor', e.target.value)}
-                    placeholder="Nome do condutor"
+                    placeholder="Nombre del conductor"
                     className={inputCls}
                   />
                 </Field>
-                <Field label="Prazas">
+                <Field label="Plazas">
                   <input
                     type="number"
                     min={1}
@@ -155,7 +155,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                 <input
                   value={form.asociacion}
                   onChange={(e) => set('asociacion', e.target.value)}
-                  placeholder="Nome da asociación"
+                  placeholder="Nombre de la asociación"
                   className={inputCls}
                 />
               </Field>
@@ -165,15 +165,15 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
           {form.tipo === 'voluntariado' && (
             <>
               <div className="grid grid-cols-2 gap-3">
-                <Field label="Voluntario condutor">
+                <Field label="Voluntario conductor">
                   <input
                     value={form.voluntario}
                     onChange={(e) => set('voluntario', e.target.value)}
-                    placeholder="Nome do voluntario"
+                    placeholder="Nombre del voluntario"
                     className={inputCls}
                   />
                 </Field>
-                <Field label="Prazas">
+                <Field label="Plazas">
                   <input
                     type="number"
                     min={1}
@@ -186,7 +186,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
               {voluntariadoWarning && (
                 <div className="flex items-start gap-2 bg-gold-50 border border-gold-300 rounded-lg p-3 text-gold-800 text-sm">
                   <Icon name="alert" size={16} className="mt-0.5 shrink-0" />
-                  <span>O voluntariado require un mínimo de 2 participantes ademais do condutor para poder realizarse.</span>
+                  <span>El voluntariado requiere un mínimo de 2 participantes además del conductor para poder realizarse.</span>
                 </div>
               )}
             </>
@@ -199,7 +199,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                   <input
                     value={form.responsable}
                     onChange={(e) => set('responsable', e.target.value)}
-                    placeholder="Nome do responsable"
+                    placeholder="Nombre del responsable"
                     className={inputCls}
                   />
                 </Field>
@@ -207,7 +207,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                   <input
                     value={form.asociacion}
                     onChange={(e) => set('asociacion', e.target.value)}
-                    placeholder="Nome da asociación"
+                    placeholder="Nombre de la asociación"
                     className={inputCls}
                   />
                 </Field>
@@ -233,7 +233,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                 onClick={() => setShowAddP((v) => !v)}
                 className="text-xs text-rioja-500 hover:text-rioja-700 font-semibold"
               >
-                + Engadir
+                + Añadir
               </button>
             </div>
 
@@ -246,7 +246,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                     <button
                       onClick={() => removeParticipante(i)}
                       className="text-rioja-400 hover:text-rioja-600 ml-auto"
-                      title="Quitar"
+                      title="Quitar participante"
                     >
                       <Icon name="x" size={14} />
                     </button>
@@ -268,7 +268,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                   <input
                     value={newParada}
                     onChange={(e) => setNewParada(e.target.value)}
-                    placeholder="Parada / Punto de recollida"
+                    placeholder="Parada / Punto de recogida"
                     className={inputCls}
                     onKeyDown={(e) => e.key === 'Enter' && addParticipante()}
                   />
@@ -292,7 +292,7 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
             Cancelar
           </button>
           <button onClick={handleSave} className={`px-5 py-2 rounded-lg text-white text-sm font-semibold shadow-heraldic ${c.bg} hover:opacity-90`}>
-            {mode === 'edit' ? 'Gardar cambios' : 'Crear actividade'}
+            {mode === 'edit' ? 'Guardar cambios' : 'Crear actividad'}
           </button>
         </div>
       </div>

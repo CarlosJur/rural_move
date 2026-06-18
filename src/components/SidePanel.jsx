@@ -24,12 +24,12 @@ export default function SidePanel({ open, actividades, onEdit, onDelete, onAddPa
       <div className="w-72 flex flex-col h-full">
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-sage-200 bg-sage-gradient">
-          <h2 className="heading-display text-base">Axenda completa</h2>
+          <h2 className="heading-display text-base">Agenda completa</h2>
           <button
             onClick={onNueva}
             className="text-xs bg-rioja-500 hover:bg-rioja-600 text-white px-2.5 py-1 rounded-lg font-semibold transition-colors shadow-sm"
           >
-            + Nova
+            + Nueva
           </button>
         </div>
 
@@ -65,7 +65,7 @@ export default function SidePanel({ open, actividades, onEdit, onDelete, onAddPa
           ))}
           {sorted.length === 0 && (
             <p className="text-sm text-sage-500 text-center py-8 px-4 italic">
-              Sen actividades. Preme "+ Nova" para crear unha.
+              Sin actividades. Pulsa "+ Nueva" para crear una.
             </p>
           )}
         </div>

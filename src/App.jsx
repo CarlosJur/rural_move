@@ -175,7 +175,7 @@ export default function App() {
         <div className="flex items-center justify-between px-6 py-2 gap-4">
           <div className="flex items-center gap-2 text-[10px] text-sage-700">
             <img src="/escudo-san-xoan.jpg" alt="" className="h-6 w-auto mix-blend-multiply" />
-            <span className="font-bold tracking-[0.12em] uppercase">Concello de San Xoán de Río</span>
+            <span className="font-bold tracking-[0.12em] uppercase">Ayuntamiento de San Xoán de Río</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-rioja-500" style={{ fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '14px' }}>

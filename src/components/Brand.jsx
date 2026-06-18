@@ -35,10 +35,10 @@ export default function Header() {
           <Escudo className="h-14 w-auto" />
           <div className="hidden sm:block min-w-0">
             <p className="text-[10px] font-semibold tracking-[0.18em] text-rioja-700 uppercase">
-              Concello de San Xoán de Río
+              Ayuntamiento de San Xoán de Río
             </p>
             <p className="heading-display text-base leading-tight truncate">
-              Mobilidade rural · Axenda de actividades
+              Movilidad rural · Agenda de actividades
             </p>
           </div>
         </div>
@@ -51,10 +51,10 @@ export default function Header() {
         {/* Derecha: tagline */}
         <div className="hidden md:flex flex-col items-end text-right">
           <span className="wordmark-move text-rioja-500 text-xl leading-none">
-            Todos os camiños
+            Todos los caminos
           </span>
           <span className="heading-display text-sage-700 text-sm italic mt-1">
-            levan a San Xoán de Río
+            llevan a San Xoán de Río
           </span>
         </div>
       </div>

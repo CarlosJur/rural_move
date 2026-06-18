@@ -131,7 +131,7 @@ const PATHS = {
     </>
   ),
 
-  // Tipos de actividade
+  // Tipos de actividad
   bus: (
     <>
       <path d="M8 6v6" />

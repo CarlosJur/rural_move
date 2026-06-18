@@ -80,7 +80,7 @@ export default function DayGrid({ currentDate, actividades, selectedTipos, onAct
 
           {dayActs.length === 0 && (
             <div className="absolute inset-0 flex items-center justify-center text-sage-400 text-sm italic">
-              Sen actividades neste día
+              Sin actividades en este día
             </div>
           )}
         </div>

@@ -9,14 +9,14 @@ export function exportarActividades(actividades, fileName = 'actividades') {
     ID: a.id,
     Tipo: TIPO_COLORS[a.tipo].label,
     Concepto: a.concepto,
-    Data: a.fecha,
-    'Hora saída': a.hora,
-    'Hora volta': a.horaVuelta ?? '',
-    'Condutor / Voluntario': a.conductor ?? a.voluntario ?? '',
+    Fecha: a.fecha,
+    'Hora salida': a.hora,
+    'Hora vuelta': a.horaVuelta ?? '',
+    'Conductor / Voluntario': a.conductor ?? a.voluntario ?? '',
     Responsable: a.responsable ?? '',
     Asociación: a.asociacion ?? '',
     Lugar: a.lugar ?? '',
-    Prazas: a.plazas ?? '',
+    Plazas: a.plazas ?? '',
     'Participantes inscritos': a.participantes.length,
     Estado: a.plazas != null ? getEstado(a) : '',
   }))
@@ -27,13 +27,13 @@ export function exportarActividades(actividades, fileName = 'actividades') {
   for (const a of actividades) {
     for (const p of a.participantes) {
       partRows.push({
-        'ID actividade': a.id,
+        'ID actividad': a.id,
         Tipo: TIPO_COLORS[a.tipo].label,
         Concepto: a.concepto,
-        Data: a.fecha,
-        'Hora saída': a.hora,
-        'Nome participante': p.nombre,
-        'Parada / Punto recollida': p.parada ?? '',
+        Fecha: a.fecha,
+        'Hora salida': a.hora,
+        'Nombre participante': p.nombre,
+        'Parada / Punto recogida': p.parada ?? '',
       })
     }
   }
