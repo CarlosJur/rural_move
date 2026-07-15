@@ -30,7 +30,10 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
       if (exportRef.current && !exportRef.current.contains(e.target)) setExportOpen(false)
     }
     const handleKey = (e) => {
-      if (e.key === 'Escape') { setFilterOpen(false); setExportOpen(false) }
+      if (e.key === 'Escape') {
+        setFilterOpen(false)
+        setExportOpen(false)
+      }
     }
     document.addEventListener('mousedown', handleClick)
     document.addEventListener('keydown', handleKey)
@@ -126,9 +129,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                       Tipos de actividad
                     </span>
                     <button
-                      onClick={() =>
-                        setSelectedTipos(allActive ? [] : Object.keys(TIPO_COLORS))
-                      }
+                      onClick={() => setSelectedTipos(allActive ? [] : Object.keys(TIPO_COLORS))}
                       className="text-[11px] font-semibold text-rioja-500 hover:text-rioja-700"
                     >
                       {allActive ? 'Ninguno' : 'Todos'}
@@ -170,46 +171,65 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
               onClick={() => selectedActividades.length > 0 && onGenerarCartel(selectedActividades)}
               disabled={selectedActividades.length === 0}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-sage-300 bg-white text-sage-700 text-sm font-semibold disabled:opacity-40 hover:bg-sage-50 transition-colors"
-              title={selectedActividades.length === 0 ? 'Selecciona actividades para generar el cartel' : `Generar cartel para ${selectedActividades.length} actividad(es)`}
+              title={
+                selectedActividades.length === 0
+                  ? 'Selecciona actividades para generar el cartel'
+                  : `Generar cartel para ${selectedActividades.length} actividad(es)`
+              }
             >
-              <Icon name="image" size={15} /> Generar cartel{selectedActividades.length > 1 ? ` (${selectedActividades.length})` : ''}
+              <Icon name="image" size={15} /> Generar cartel
+              {selectedActividades.length > 1 ? ` (${selectedActividades.length})` : ''}
             </button>
             {/* Export dropdown */}
             <div className="relative" ref={exportRef}>
               <button
                 onClick={() => setExportOpen((v) => !v)}
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-                  exportOpen
-                    ? 'bg-sage-800 text-white'
-                    : 'bg-sage-700 hover:bg-sage-800 text-white'
+                  exportOpen ? 'bg-sage-800 text-white' : 'bg-sage-700 hover:bg-sage-800 text-white'
                 }`}
               >
                 <Icon name="download" size={15} /> XLSX
-                <Icon name="chevron-down" size={13} className={`transition-transform ${exportOpen ? 'rotate-180' : ''}`} />
+                <Icon
+                  name="chevron-down"
+                  size={13}
+                  className={`transition-transform ${exportOpen ? 'rotate-180' : ''}`}
+                />
               </button>
 
               {exportOpen && (
                 <div className="absolute right-0 mt-2 w-56 bg-white border border-sage-200 rounded-xl shadow-card-hover z-50 overflow-hidden">
                   <div className="px-3 py-2 border-b border-sage-100 bg-cream-50">
-                    <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-sage-600">Exportar XLSX</span>
+                    <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-sage-600">
+                      Exportar XLSX
+                    </span>
                   </div>
                   <div className="py-1">
                     <button
-                      onClick={() => { exportarActividades(actividades, 'actividades'); setExportOpen(false) }}
+                      onClick={() => {
+                        exportarActividades(actividades, 'actividades')
+                        setExportOpen(false)
+                      }}
                       className="flex items-center gap-2 w-full px-3 py-2 text-sm text-sage-800 hover:bg-sage-50 transition-colors"
                     >
                       <Icon name="download" size={14} className="text-sage-500" />
                       <span className="font-medium">Exportar todo</span>
-                      <span className="ml-auto text-[11px] text-sage-400">{actividades.length}</span>
+                      <span className="ml-auto text-[11px] text-sage-400">
+                        {actividades.length}
+                      </span>
                     </button>
                     <button
-                      onClick={() => { exportarActividades(selectedActividades, 'seleccion'); setExportOpen(false) }}
+                      onClick={() => {
+                        exportarActividades(selectedActividades, 'seleccion')
+                        setExportOpen(false)
+                      }}
                       disabled={selectedActividades.length === 0}
                       className="flex items-center gap-2 w-full px-3 py-2 text-sm text-sage-800 hover:bg-sage-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                       <Icon name="check" size={14} className="text-sage-500" />
                       <span className="font-medium">Exportar selección</span>
-                      <span className="ml-auto text-[11px] text-sage-400">{selectedActividades.length}</span>
+                      <span className="ml-auto text-[11px] text-sage-400">
+                        {selectedActividades.length}
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -237,7 +257,9 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                     type="checkbox"
                     checked={allFilteredSelected}
                     onChange={toggleAllFiltered}
-                    ref={(el) => { if (el) el.indeterminate = !allFilteredSelected && someFilteredSelected }}
+                    ref={(el) => {
+                      if (el) el.indeterminate = !allFilteredSelected && someFilteredSelected
+                    }}
                     className="cursor-pointer accent-rioja-500"
                   />
                 </th>
@@ -324,7 +346,8 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                         <span className="font-semibold text-ink">{a.concepto}</span>
                         {a.lugar && (
                           <span className="block text-[11px] text-sage-500 mt-0.5">
-                            <Icon name="map-pin" size={10} className="mr-0.5" />{a.lugar}
+                            <Icon name="map-pin" size={10} className="mr-0.5" />
+                            {a.lugar}
                           </span>
                         )}
                       </td>
@@ -333,9 +356,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                         {formatFecha(a.fecha)}
                       </td>
 
-                      <td className="px-4 py-2.5 whitespace-nowrap text-sage-700">
-                        {a.hora}
-                      </td>
+                      <td className="px-4 py-2.5 whitespace-nowrap text-sage-700">{a.hora}</td>
 
                       <td className="px-4 py-2.5 whitespace-nowrap text-sage-600">
                         {a.horaVuelta || <span className="text-sage-300">—</span>}
@@ -346,9 +367,7 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
                       </td>
 
                       <td className="px-4 py-2.5 whitespace-nowrap text-sage-600">
-                        {a.plazas != null
-                          ? `${a.participantes.length} / ${a.plazas}`
-                          : '—'}
+                        {a.plazas != null ? `${a.participantes.length} / ${a.plazas}` : '—'}
                       </td>
 
                       <td className="px-4 py-2.5 whitespace-nowrap">
@@ -372,13 +391,19 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
 
                       <td className="px-4 py-2.5 text-right whitespace-nowrap">
                         <button
-                          onClick={(e) => { e.stopPropagation(); onEdit(a) }}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            onEdit(a)
+                          }}
                           className="inline-flex items-center gap-1 text-xs text-sage-600 hover:text-sage-900 font-semibold mr-3 transition-colors"
                         >
                           <Icon name="pencil" size={12} /> Editar
                         </button>
                         <button
-                          onClick={(e) => { e.stopPropagation(); onDelete(a.id) }}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            onDelete(a.id)
+                          }}
                           className="inline-flex items-center gap-1 text-xs text-rioja-500 hover:text-rioja-700 font-semibold transition-colors"
                         >
                           <Icon name="trash" size={12} />
@@ -420,11 +445,22 @@ export default function ActivitiesPage({ actividades, onAdd, onEdit, onDelete, o
 
         {selectedActividades.length > 0 && (
           <p className="text-[11px] text-sage-500 italic mt-3 text-right">
-            {selectedActividades.length === 1
-              ? <>Seleccionada: <span className="font-semibold text-rioja-600">{selectedActividades[0].concepto}</span></>
-              : <><span className="font-semibold text-rioja-600">{selectedActividades.length} actividades</span> seleccionadas</>
-            }
-            {' '}— pulsa «Generar cartel» para continuar.
+            {selectedActividades.length === 1 ? (
+              <>
+                Seleccionada:{' '}
+                <span className="font-semibold text-rioja-600">
+                  {selectedActividades[0].concepto}
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="font-semibold text-rioja-600">
+                  {selectedActividades.length} actividades
+                </span>{' '}
+                seleccionadas
+              </>
+            )}{' '}
+            — pulsa «Generar cartel» para continuar.
           </p>
         )}
       </div>

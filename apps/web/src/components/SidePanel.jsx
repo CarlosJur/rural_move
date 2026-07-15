@@ -2,9 +2,17 @@ import { TIPO_COLORS } from '../data/mockData'
 import { MESES } from '../utils/dateUtils'
 import ActivityCard from './ActivityCard'
 
-export default function SidePanel({ open, actividades, onEdit, onDelete, onAddParticipant, onNueva }) {
-  const sorted = [...actividades]
-    .sort((a, b) => a.fecha.localeCompare(b.fecha) || a.hora.localeCompare(b.hora))
+export default function SidePanel({
+  open,
+  actividades,
+  onEdit,
+  onDelete,
+  onAddParticipant,
+  onNueva,
+}) {
+  const sorted = [...actividades].sort(
+    (a, b) => a.fecha.localeCompare(b.fecha) || a.hora.localeCompare(b.hora)
+  )
 
   // Group by year-month
   const groups = {}
@@ -48,7 +56,9 @@ export default function SidePanel({ open, actividades, onEdit, onDelete, onAddPa
           {Object.entries(groups).map(([key, { label, items }]) => (
             <div key={key}>
               <div className="px-4 py-2 bg-sage-100/60 border-y border-sage-200 sticky top-0 backdrop-blur-sm">
-                <span className="text-xs font-bold text-sage-700 uppercase tracking-[0.15em]">{label}</span>
+                <span className="text-xs font-bold text-sage-700 uppercase tracking-[0.15em]">
+                  {label}
+                </span>
               </div>
               <div className="px-3 py-2 space-y-2">
                 {items.map((a) => (

@@ -24,9 +24,7 @@ export const actividades = [
     hora: '10:30',
     horaVuelta: '13:00',
     plazas: 5,
-    participantes: [
-      { nombre: 'Pedro Sánchez', parada: 'Avenida Central' },
-    ],
+    participantes: [{ nombre: 'Pedro Sánchez', parada: 'Avenida Central' }],
   },
   {
     id: 3,
@@ -49,9 +47,7 @@ export const actividades = [
     horaVuelta: '19:00',
     plazas: 35,
     asociacion: 'Club de Jubilados',
-    participantes: [
-      { nombre: 'María Fernández', parada: 'Calle Mayor' },
-    ],
+    participantes: [{ nombre: 'María Fernández', parada: 'Calle Mayor' }],
   },
   {
     id: 5,
@@ -98,9 +94,7 @@ export const actividades = [
     fecha: '2025-08-26',
     hora: '08:00',
     plazas: 3,
-    participantes: [
-      { nombre: 'Carlos López', parada: 'Entrada Parque Norte' },
-    ],
+    participantes: [{ nombre: 'Carlos López', parada: 'Entrada Parque Norte' }],
   },
 ]
 

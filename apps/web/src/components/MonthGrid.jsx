@@ -1,7 +1,13 @@
 import { TIPO_COLORS } from '../data/mockData'
 import { DIAS_SEMANA_SHORT, mondayOffset } from '../utils/dateUtils'
 
-export default function MonthGrid({ currentDate, actividades, selectedTipos, onDayClick, onActivityClick }) {
+export default function MonthGrid({
+  currentDate,
+  actividades,
+  selectedTipos,
+  onDayClick,
+  onActivityClick,
+}) {
   const year = currentDate.getFullYear()
   const month = currentDate.getMonth()
   const today = new Date()
@@ -35,7 +41,10 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
       {/* Day headers */}
       <div className="grid grid-cols-7 border-b-2 border-sage-300 flex-shrink-0 bg-sage-gradient">
         {DIAS_SEMANA_SHORT.map((d) => (
-          <div key={d} className="text-center text-xs font-bold uppercase tracking-[0.15em] text-sage-800 py-2.5 border-r border-sage-200 last:border-r-0">
+          <div
+            key={d}
+            className="text-center text-xs font-bold uppercase tracking-[0.15em] text-sage-800 py-2.5 border-r border-sage-200 last:border-r-0"
+          >
             {d}
           </div>
         ))}
@@ -44,7 +53,7 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
       {/* Grid */}
       <div className="grid grid-cols-7 flex-1 overflow-y-auto">
         {cells.map((day, idx) => {
-          const dayActs = day ? (actsByDay[day] || []) : []
+          const dayActs = day ? actsByDay[day] || [] : []
           const visible = dayActs.slice(0, 3)
           const extra = dayActs.length - visible.length
           const iso = day ? isoOfDay(day) : null
@@ -67,16 +76,17 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
                   <div className="flex items-center justify-between">
                     <span
                       className={`text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full transition-colors ${
-                        isToday(day)
-                          ? 'bg-rioja-500 text-white shadow-heraldic'
-                          : 'text-sage-800'
+                        isToday(day) ? 'bg-rioja-500 text-white shadow-heraldic' : 'text-sage-800'
                       }`}
                     >
                       {day}
                     </span>
                     {/* + button on hover */}
                     <button
-                      onClick={(e) => { e.stopPropagation(); onDayClick(iso) }}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        onDayClick(iso)
+                      }}
                       className="opacity-0 group-hover:opacity-100 text-sage-400 hover:text-rioja-500 text-sm transition-opacity leading-none font-bold"
                     >
                       +
@@ -88,7 +98,10 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
                     {visible.map((a) => (
                       <div
                         key={a.id}
-                        onClick={(e) => { e.stopPropagation(); onActivityClick(a) }}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          onActivityClick(a)
+                        }}
                         className="text-[11px] truncate rounded px-1.5 py-0.5 text-white font-semibold cursor-pointer hover:opacity-90 transition-opacity shadow-sm"
                         style={{ backgroundColor: TIPO_COLORS[a.tipo].dot }}
                         title={a.concepto}
@@ -98,7 +111,10 @@ export default function MonthGrid({ currentDate, actividades, selectedTipos, onD
                     ))}
                     {extra > 0 && (
                       <div
-                        onClick={(e) => { e.stopPropagation(); onDayClick(iso) }}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          onDayClick(iso)
+                        }}
                         className="text-[10px] text-sage-600 hover:text-sage-800 cursor-pointer pl-1 font-semibold"
                       >
                         +{extra} más

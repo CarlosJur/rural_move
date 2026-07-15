@@ -30,13 +30,15 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('calendar')
 
   const addActividad = (data) =>
-    setActividades((prev) => [...prev, { ...data, id: Date.now(), participantes: data.participantes || [] }])
+    setActividades((prev) => [
+      ...prev,
+      { ...data, id: Date.now(), participantes: data.participantes || [] },
+    ])
 
   const updateActividad = (updated) =>
     setActividades((prev) => prev.map((a) => (a.id === updated.id ? updated : a)))
 
-  const deleteActividad = (id) =>
-    setActividades((prev) => prev.filter((a) => a.id !== id))
+  const deleteActividad = (id) => setActividades((prev) => prev.filter((a) => a.id !== id))
 
   const openAdd = (prefillDate = null) =>
     setModalState({ open: true, mode: 'add', actividad: null, prefillDate })
@@ -175,16 +177,26 @@ export default function App() {
         <div className="flex items-center justify-between px-6 py-2 gap-4">
           <div className="flex items-center gap-2 text-[10px] text-sage-700">
             <img src="/escudo-san-xoan.jpg" alt="" className="h-6 w-auto mix-blend-multiply" />
-            <span className="font-bold tracking-[0.12em] uppercase">Ayuntamiento de San Xoán de Río</span>
+            <span className="font-bold tracking-[0.12em] uppercase">
+              Ayuntamiento de San Xoán de Río
+            </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-rioja-500" style={{ fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '14px' }}>
+            <span
+              className="text-rioja-500"
+              style={{ fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '14px' }}
+            >
               Rural
             </span>
-            <span className="text-rioja-500" style={{ fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '14px' }}>
+            <span
+              className="text-rioja-500"
+              style={{ fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '14px' }}
+            >
               move
             </span>
-            <span className="text-[10px] text-sage-600 italic ml-2">© {new Date().getFullYear()}</span>
+            <span className="text-[10px] text-sage-600 italic ml-2">
+              © {new Date().getFullYear()}
+            </span>
           </div>
         </div>
       </footer>

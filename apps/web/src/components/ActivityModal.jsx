@@ -17,7 +17,8 @@ const DEFAULTS = {
   participantes: [],
 }
 
-const inputCls = "w-full border border-sage-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:border-sage-600 focus:ring-2 focus:ring-sage-200 transition"
+const inputCls =
+  'w-full border border-sage-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:border-sage-600 focus:ring-2 focus:ring-sage-200 transition'
 
 export default function ActivityModal({ actividad, prefillDate, mode, onSave, onClose }) {
   const initial = actividad
@@ -64,7 +65,13 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
           <h2 className="heading-display text-xl">
             {mode === 'edit' ? 'Editar actividad' : 'Nueva actividad'}
           </h2>
-          <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 transition-colors" title="Cerrar"><Icon name="x" size={20} /></button>
+          <button
+            onClick={onClose}
+            className="text-sage-600 hover:text-rioja-500 transition-colors"
+            title="Cerrar"
+          >
+            <Icon name="x" size={20} />
+          </button>
         </div>
 
         <div className="px-6 py-4 space-y-4 max-h-[70vh] overflow-y-auto bg-cream-50">
@@ -186,7 +193,10 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
               {voluntariadoWarning && (
                 <div className="flex items-start gap-2 bg-gold-50 border border-gold-300 rounded-lg p-3 text-gold-800 text-sm">
                   <Icon name="alert" size={16} className="mt-0.5 shrink-0" />
-                  <span>El voluntariado requiere un mínimo de 2 participantes además del conductor para poder realizarse.</span>
+                  <span>
+                    El voluntariado requiere un mínimo de 2 participantes además del conductor para
+                    poder realizarse.
+                  </span>
                 </div>
               )}
             </>
@@ -240,9 +250,14 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
             {form.participantes.length > 0 && (
               <div className="space-y-1 mb-2">
                 {form.participantes.map((p, i) => (
-                  <div key={i} className="flex items-center bg-white border border-sage-200 rounded px-3 py-1.5 text-sm gap-2">
+                  <div
+                    key={i}
+                    className="flex items-center bg-white border border-sage-200 rounded px-3 py-1.5 text-sm gap-2"
+                  >
                     <span className="font-semibold text-sage-800">{p.nombre}</span>
-                    {p.parada && <span className="text-sage-500 text-xs truncate flex-1">· {p.parada}</span>}
+                    {p.parada && (
+                      <span className="text-sage-500 text-xs truncate flex-1">· {p.parada}</span>
+                    )}
                     <button
                       onClick={() => removeParticipante(i)}
                       className="text-rioja-400 hover:text-rioja-600 ml-auto"
@@ -274,10 +289,16 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
                   />
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={addParticipante} className="text-xs bg-rioja-500 text-white px-3 py-1 rounded font-semibold hover:bg-rioja-600">
+                  <button
+                    onClick={addParticipante}
+                    className="text-xs bg-rioja-500 text-white px-3 py-1 rounded font-semibold hover:bg-rioja-600"
+                  >
                     Confirmar
                   </button>
-                  <button onClick={() => setShowAddP(false)} className="text-xs text-sage-600 hover:text-sage-800 font-semibold">
+                  <button
+                    onClick={() => setShowAddP(false)}
+                    className="text-xs text-sage-600 hover:text-sage-800 font-semibold"
+                  >
                     Cancelar
                   </button>
                 </div>
@@ -288,10 +309,16 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
 
         {/* Footer */}
         <div className="flex justify-end gap-3 px-6 py-4 border-t border-sage-200 bg-cream-100">
-          <button onClick={onClose} className="px-4 py-2 rounded-lg border border-sage-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg border border-sage-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50"
+          >
             Cancelar
           </button>
-          <button onClick={handleSave} className={`px-5 py-2 rounded-lg text-white text-sm font-semibold shadow-heraldic ${c.bg} hover:opacity-90`}>
+          <button
+            onClick={handleSave}
+            className={`px-5 py-2 rounded-lg text-white text-sm font-semibold shadow-heraldic ${c.bg} hover:opacity-90`}
+          >
             {mode === 'edit' ? 'Guardar cambios' : 'Crear actividad'}
           </button>
         </div>
@@ -303,7 +330,9 @@ export default function ActivityModal({ actividad, prefillDate, mode, onSave, on
 function Field({ label, children }) {
   return (
     <div>
-      <label className="block text-[10px] font-bold text-sage-700 mb-1 uppercase tracking-[0.15em]">{label}</label>
+      <label className="block text-[10px] font-bold text-sage-700 mb-1 uppercase tracking-[0.15em]">
+        {label}
+      </label>
       {children}
     </div>
   )

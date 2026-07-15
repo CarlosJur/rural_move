@@ -78,14 +78,16 @@ export default function Toolbar({
 
       {/* Center: view toggle */}
       <div className="flex border border-sage-300 rounded-lg overflow-hidden bg-white">
-        {[['month', 'Mes'], ['week', 'Semana'], ['day', 'Día']].map(([mode, label]) => (
+        {[
+          ['month', 'Mes'],
+          ['week', 'Semana'],
+          ['day', 'Día'],
+        ].map(([mode, label]) => (
           <button
             key={mode}
             onClick={() => onViewChange(mode)}
             className={`px-3 py-1.5 text-sm font-semibold transition-colors ${
-              viewMode === mode
-                ? 'bg-sage-600 text-white'
-                : 'text-sage-700 hover:bg-sage-50'
+              viewMode === mode ? 'bg-sage-600 text-white' : 'text-sage-700 hover:bg-sage-50'
             }`}
           >
             {label}
@@ -111,18 +113,26 @@ export default function Toolbar({
                 {selectedTipos.length}
               </span>
             )}
-            <Icon name="chevron-down" size={14} className={`transition-transform ${filterOpen ? 'rotate-180' : ''}`} />
+            <Icon
+              name="chevron-down"
+              size={14}
+              className={`transition-transform ${filterOpen ? 'rotate-180' : ''}`}
+            />
           </button>
 
           {filterOpen && (
             <div className="absolute right-0 mt-2 w-60 bg-white border border-sage-200 rounded-xl shadow-card-hover z-50 overflow-hidden">
               <div className="flex items-center justify-between px-3 py-2 border-b border-sage-100 bg-cream-50">
-                <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-sage-600">Tipos de actividad</span>
+                <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-sage-600">
+                  Tipos de actividad
+                </span>
                 <button
-                  onClick={() => tipos.forEach(([tipo]) => {
-                    const active = selectedTipos.includes(tipo)
-                    if (allActive ? true : !active) onToggleTipo(tipo)
-                  })}
+                  onClick={() =>
+                    tipos.forEach(([tipo]) => {
+                      const active = selectedTipos.includes(tipo)
+                      if (allActive ? true : !active) onToggleTipo(tipo)
+                    })
+                  }
                   className="text-[11px] font-semibold text-rioja-500 hover:text-rioja-700"
                 >
                   {allActive ? 'Ninguno' : 'Todos'}
@@ -139,12 +149,16 @@ export default function Toolbar({
                     >
                       <span
                         className={`flex items-center justify-center w-4 h-4 rounded border transition-colors ${
-                          active ? `${c.bg} border-transparent text-white` : 'bg-white border-sage-300 text-transparent'
+                          active
+                            ? `${c.bg} border-transparent text-white`
+                            : 'bg-white border-sage-300 text-transparent'
                         }`}
                       >
                         <Icon name="check" size={12} strokeWidth={3} />
                       </span>
-                      <span className={c.text}><Icon name={c.icon} size={15} /></span>
+                      <span className={c.text}>
+                        <Icon name={c.icon} size={15} />
+                      </span>
                       <span className="font-medium">{c.label}</span>
                     </button>
                   )

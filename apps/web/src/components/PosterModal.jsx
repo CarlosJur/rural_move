@@ -18,7 +18,11 @@ export default function PosterModal({ actividades, onClose }) {
       for (let i = 0; i < actividades.length; i++) {
         const el = posterRefs.current[i]
         if (!el) continue
-        const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#FBF8F0' })
+        const canvas = await html2canvas(el, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#FBF8F0',
+        })
         const link = document.createElement('a')
         link.download = `cartel-${actividades[i].concepto.replace(/\s+/g, '-').toLowerCase()}.png`
         link.href = canvas.toDataURL('image/png')
@@ -34,7 +38,11 @@ export default function PosterModal({ actividades, onClose }) {
     setDownloading(true)
     try {
       const { default: html2canvas } = await import('html2canvas')
-      const canvas = await html2canvas(combinedRef.current, { scale: 2, useCORS: true, backgroundColor: '#FBF8F0' })
+      const canvas = await html2canvas(combinedRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#FBF8F0',
+      })
       const link = document.createElement('a')
       link.download = 'cartel-conjunto.png'
       link.href = canvas.toDataURL('image/png')
@@ -52,11 +60,21 @@ export default function PosterModal({ actividades, onClose }) {
   const downloadLabel = () => {
     if (downloading) return 'Generando...'
     if (!isMulti || mode === 'individual') {
-      return actividades.length === 1
-        ? <><Icon name="download" size={15} /> Descargar como imagen</>
-        : <><Icon name="download" size={15} /> Descargar {actividades.length} carteles</>
+      return actividades.length === 1 ? (
+        <>
+          <Icon name="download" size={15} /> Descargar como imagen
+        </>
+      ) : (
+        <>
+          <Icon name="download" size={15} /> Descargar {actividades.length} carteles
+        </>
+      )
     }
-    return <><Icon name="download" size={15} /> Descargar cartel conjunto</>
+    return (
+      <>
+        <Icon name="download" size={15} /> Descargar cartel conjunto
+      </>
+    )
   }
 
   return (
@@ -68,7 +86,11 @@ export default function PosterModal({ actividades, onClose }) {
           <h2 className="heading-display text-xl">
             {isMulti ? `Generar carteles (${actividades.length} seleccionados)` : 'Generar cartel'}
           </h2>
-          <button onClick={onClose} className="text-sage-600 hover:text-rioja-500 transition-colors" title="Cerrar">
+          <button
+            onClick={onClose}
+            className="text-sage-600 hover:text-rioja-500 transition-colors"
+            title="Cerrar"
+          >
             <Icon name="x" size={20} />
           </button>
         </div>
@@ -106,12 +128,14 @@ export default function PosterModal({ actividades, onClose }) {
 
         {/* Poster preview area */}
         <div className="p-6 overflow-y-auto max-h-[60vh] bg-cream-100 space-y-6">
-          {(!isMulti || mode === 'individual') ? (
+          {!isMulti || mode === 'individual' ? (
             actividades.map((a, i) => (
               <div key={a.id} className="flex justify-center">
                 <SinglePoster
                   actividad={a}
-                  ref={(el) => { posterRefs.current[i] = el }}
+                  ref={(el) => {
+                    posterRefs.current[i] = el
+                  }}
                 />
               </div>
             ))
@@ -123,7 +147,10 @@ export default function PosterModal({ actividades, onClose }) {
         </div>
 
         <div className="flex justify-end gap-3 px-6 py-4 border-t border-sage-200 bg-cream-100">
-          <button onClick={onClose} className="px-4 py-2 rounded-lg border border-sage-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg border border-sage-300 bg-white text-sage-700 text-sm font-semibold hover:bg-sage-50"
+          >
             Cerrar
           </button>
           <button
@@ -141,11 +168,7 @@ export default function PosterModal({ actividades, onClose }) {
 
 const SinglePoster = forwardRef(function SinglePoster({ actividad }, ref) {
   const c = TIPO_COLORS[actividad.tipo]
-  const conductor =
-    actividad.conductor ||
-    actividad.voluntario ||
-    actividad.responsable ||
-    null
+  const conductor = actividad.conductor || actividad.voluntario || actividad.responsable || null
 
   return (
     <div
@@ -154,18 +177,50 @@ const SinglePoster = forwardRef(function SinglePoster({ actividad }, ref) {
       style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
     >
       {/* Cabeceira heráldica */}
-      <div className="h-2" style={{ background: 'linear-gradient(90deg, #C8102E 0%, #CFA12E 50%, #C8102E 100%)' }} />
-      <div className="px-8 py-5 flex items-center gap-4 border-b border-sage-200" style={{ backgroundColor: '#E6EFE8' }}>
+      <div
+        className="h-2"
+        style={{ background: 'linear-gradient(90deg, #C8102E 0%, #CFA12E 50%, #C8102E 100%)' }}
+      />
+      <div
+        className="px-8 py-5 flex items-center gap-4 border-b border-sage-200"
+        style={{ backgroundColor: '#E6EFE8' }}
+      >
         <img src="/escudo-san-xoan.jpg" alt="" className="h-14 w-auto drop-shadow-sm" />
         <div className="flex-1 min-w-0">
-          <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: '#810A1E' }}>AYUNTAMIENTO DE SAN XOÁN DE RÍO</p>
-          <p className="text-base italic font-bold mt-0.5" style={{ color: '#324740', fontFamily: 'Playfair Display, Georgia, serif' }}>
+          <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: '#810A1E' }}>
+            AYUNTAMIENTO DE SAN XOÁN DE RÍO
+          </p>
+          <p
+            className="text-base italic font-bold mt-0.5"
+            style={{ color: '#324740', fontFamily: 'Playfair Display, Georgia, serif' }}
+          >
             Movilidad rural · Agenda municipal
           </p>
         </div>
         <div className="flex flex-col items-end leading-none">
-          <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontStyle: 'italic', fontWeight: 900, fontSize: '24px', color: '#1A1A1A' }}>Rural</span>
-          <span style={{ fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '30px', color: '#C8102E', marginTop: '-8px', marginLeft: '4px' }}>move</span>
+          <span
+            style={{
+              fontFamily: 'Playfair Display, Georgia, serif',
+              fontStyle: 'italic',
+              fontWeight: 900,
+              fontSize: '24px',
+              color: '#1A1A1A',
+            }}
+          >
+            Rural
+          </span>
+          <span
+            style={{
+              fontFamily: 'Dancing Script, cursive',
+              fontWeight: 700,
+              fontSize: '30px',
+              color: '#C8102E',
+              marginTop: '-8px',
+              marginLeft: '4px',
+            }}
+          >
+            move
+          </span>
         </div>
       </div>
 
@@ -174,7 +229,10 @@ const SinglePoster = forwardRef(function SinglePoster({ actividad }, ref) {
         <span className="inline-flex items-center gap-1.5 bg-white/25 text-white text-[10px] font-bold tracking-[0.15em] px-3 py-1 rounded-full">
           <Icon name={c.icon} size={13} /> {c.label.toUpperCase()}
         </span>
-        <h1 className="text-white text-2xl font-extrabold leading-tight mt-3" style={{ fontFamily: 'Playfair Display, Georgia, serif', fontStyle: 'italic' }}>
+        <h1
+          className="text-white text-2xl font-extrabold leading-tight mt-3"
+          style={{ fontFamily: 'Playfair Display, Georgia, serif', fontStyle: 'italic' }}
+        >
           {actividad.concepto}
         </h1>
       </div>
@@ -194,22 +252,44 @@ const SinglePoster = forwardRef(function SinglePoster({ actividad }, ref) {
         {conductor && (
           <InfoRow
             icon="user"
-            label={actividad.conductor ? 'Conductor' : actividad.voluntario != null ? 'Voluntario conductor' : 'Responsable'}
+            label={
+              actividad.conductor
+                ? 'Conductor'
+                : actividad.voluntario != null
+                  ? 'Voluntario conductor'
+                  : 'Responsable'
+            }
             value={conductor}
           />
         )}
         {actividad.lugar && <InfoRow icon="map-pin" label="Lugar" value={actividad.lugar} />}
-        {actividad.asociacion && <InfoRow icon="home" label="Asociación" value={actividad.asociacion} />}
+        {actividad.asociacion && (
+          <InfoRow icon="home" label="Asociación" value={actividad.asociacion} />
+        )}
         {actividad.plazas != null && (
           <InfoRow icon="users" label="Plazas ofertadas" value={String(actividad.plazas)} />
         )}
       </div>
 
       {/* Pé institucional */}
-      <div className="px-8 py-4 flex items-center justify-between border-t border-sage-200" style={{ backgroundColor: '#F5F0E2' }}>
+      <div
+        className="px-8 py-4 flex items-center justify-between border-t border-sage-200"
+        style={{ backgroundColor: '#F5F0E2' }}
+      >
         <div>
-          <p className="text-[10px] font-bold tracking-[0.15em]" style={{ color: '#476356' }}>AYUNTAMIENTO DE SAN XOÁN DE RÍO</p>
-          <p className="italic mt-0.5" style={{ color: '#C8102E', fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '18px', lineHeight: 1 }}>
+          <p className="text-[10px] font-bold tracking-[0.15em]" style={{ color: '#476356' }}>
+            AYUNTAMIENTO DE SAN XOÁN DE RÍO
+          </p>
+          <p
+            className="italic mt-0.5"
+            style={{
+              color: '#C8102E',
+              fontFamily: 'Dancing Script, cursive',
+              fontWeight: 700,
+              fontSize: '18px',
+              lineHeight: 1,
+            }}
+          >
             Todos los caminos llevan a San Xoán de Río
           </p>
         </div>
@@ -233,18 +313,50 @@ const CombinedPoster = forwardRef(function CombinedPoster({ actividades }, ref) 
       style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
     >
       {/* Cabeceira heráldica */}
-      <div className="h-2" style={{ background: 'linear-gradient(90deg, #C8102E 0%, #CFA12E 50%, #C8102E 100%)' }} />
-      <div className="px-8 py-5 flex items-center gap-4 border-b border-sage-200" style={{ backgroundColor: '#E6EFE8' }}>
+      <div
+        className="h-2"
+        style={{ background: 'linear-gradient(90deg, #C8102E 0%, #CFA12E 50%, #C8102E 100%)' }}
+      />
+      <div
+        className="px-8 py-5 flex items-center gap-4 border-b border-sage-200"
+        style={{ backgroundColor: '#E6EFE8' }}
+      >
         <img src="/escudo-san-xoan.jpg" alt="" className="h-14 w-auto drop-shadow-sm" />
         <div className="flex-1 min-w-0">
-          <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: '#810A1E' }}>AYUNTAMIENTO DE SAN XOÁN DE RÍO</p>
-          <p className="text-base italic font-bold mt-0.5" style={{ color: '#324740', fontFamily: 'Playfair Display, Georgia, serif' }}>
+          <p className="text-[10px] font-bold tracking-[0.18em]" style={{ color: '#810A1E' }}>
+            AYUNTAMIENTO DE SAN XOÁN DE RÍO
+          </p>
+          <p
+            className="text-base italic font-bold mt-0.5"
+            style={{ color: '#324740', fontFamily: 'Playfair Display, Georgia, serif' }}
+          >
             Movilidad rural · Agenda municipal
           </p>
         </div>
         <div className="flex flex-col items-end leading-none">
-          <span style={{ fontFamily: 'Playfair Display, Georgia, serif', fontStyle: 'italic', fontWeight: 900, fontSize: '24px', color: '#1A1A1A' }}>Rural</span>
-          <span style={{ fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '30px', color: '#C8102E', marginTop: '-8px', marginLeft: '4px' }}>move</span>
+          <span
+            style={{
+              fontFamily: 'Playfair Display, Georgia, serif',
+              fontStyle: 'italic',
+              fontWeight: 900,
+              fontSize: '24px',
+              color: '#1A1A1A',
+            }}
+          >
+            Rural
+          </span>
+          <span
+            style={{
+              fontFamily: 'Dancing Script, cursive',
+              fontWeight: 700,
+              fontSize: '30px',
+              color: '#C8102E',
+              marginTop: '-8px',
+              marginLeft: '4px',
+            }}
+          >
+            move
+          </span>
         </div>
       </div>
 
@@ -253,7 +365,10 @@ const CombinedPoster = forwardRef(function CombinedPoster({ actividades }, ref) 
         <span className="inline-flex items-center gap-1.5 bg-white/25 text-white text-[10px] font-bold tracking-[0.15em] px-3 py-1 rounded-full">
           <Icon name={headerIcon} size={13} /> {headerLabel}
         </span>
-        <h1 className="text-white text-xl font-extrabold leading-tight mt-2" style={{ fontFamily: 'Playfair Display, Georgia, serif', fontStyle: 'italic' }}>
+        <h1
+          className="text-white text-xl font-extrabold leading-tight mt-2"
+          style={{ fontFamily: 'Playfair Display, Georgia, serif', fontStyle: 'italic' }}
+        >
           {actividades.length} actividades seleccionadas
         </h1>
       </div>
@@ -265,21 +380,33 @@ const CombinedPoster = forwardRef(function CombinedPoster({ actividades }, ref) 
           return (
             <div key={a.id} className="py-3">
               <div className="flex items-center gap-1.5 mb-1.5">
-                <span className={ac.text}><Icon name={ac.icon} size={13} /></span>
-                <p className="font-bold text-ink text-sm" style={{ fontFamily: 'Playfair Display, Georgia, serif', fontStyle: 'italic' }}>
+                <span className={ac.text}>
+                  <Icon name={ac.icon} size={13} />
+                </span>
+                <p
+                  className="font-bold text-ink text-sm"
+                  style={{ fontFamily: 'Playfair Display, Georgia, serif', fontStyle: 'italic' }}
+                >
                   {a.concepto}
                 </p>
               </div>
               <div className="flex flex-wrap gap-x-4 gap-y-0.5 text-xs text-sage-600">
-                <span className="inline-flex items-center gap-1"><Icon name="calendar" size={11} /> {formatFecha(a.fecha)}</span>
                 <span className="inline-flex items-center gap-1">
-                  <Icon name="clock" size={11} /> {a.hora}{a.horaVuelta ? ` → ${a.horaVuelta}` : ''}
+                  <Icon name="calendar" size={11} /> {formatFecha(a.fecha)}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <Icon name="clock" size={11} /> {a.hora}
+                  {a.horaVuelta ? ` → ${a.horaVuelta}` : ''}
                 </span>
                 {a.plazas != null && (
-                  <span className="inline-flex items-center gap-1"><Icon name="users" size={11} /> {a.plazas} plazas</span>
+                  <span className="inline-flex items-center gap-1">
+                    <Icon name="users" size={11} /> {a.plazas} plazas
+                  </span>
                 )}
                 {a.lugar && (
-                  <span className="inline-flex items-center gap-1"><Icon name="map-pin" size={11} /> {a.lugar}</span>
+                  <span className="inline-flex items-center gap-1">
+                    <Icon name="map-pin" size={11} /> {a.lugar}
+                  </span>
                 )}
               </div>
             </div>
@@ -288,10 +415,24 @@ const CombinedPoster = forwardRef(function CombinedPoster({ actividades }, ref) 
       </div>
 
       {/* Pé institucional */}
-      <div className="px-8 py-4 flex items-center justify-between border-t border-sage-200" style={{ backgroundColor: '#F5F0E2' }}>
+      <div
+        className="px-8 py-4 flex items-center justify-between border-t border-sage-200"
+        style={{ backgroundColor: '#F5F0E2' }}
+      >
         <div>
-          <p className="text-[10px] font-bold tracking-[0.15em]" style={{ color: '#476356' }}>AYUNTAMIENTO DE SAN XOÁN DE RÍO</p>
-          <p className="italic mt-0.5" style={{ color: '#C8102E', fontFamily: 'Dancing Script, cursive', fontWeight: 700, fontSize: '18px', lineHeight: 1 }}>
+          <p className="text-[10px] font-bold tracking-[0.15em]" style={{ color: '#476356' }}>
+            AYUNTAMIENTO DE SAN XOÁN DE RÍO
+          </p>
+          <p
+            className="italic mt-0.5"
+            style={{
+              color: '#C8102E',
+              fontFamily: 'Dancing Script, cursive',
+              fontWeight: 700,
+              fontSize: '18px',
+              lineHeight: 1,
+            }}
+          >
             Todos los caminos llevan a San Xoán de Río
           </p>
         </div>
@@ -304,7 +445,9 @@ const CombinedPoster = forwardRef(function CombinedPoster({ actividades }, ref) 
 function InfoRow({ icon, label, value }) {
   return (
     <div className="flex items-start gap-3">
-      <span className="text-sage-500 mt-0.5"><Icon name={icon} size={16} /></span>
+      <span className="text-sage-500 mt-0.5">
+        <Icon name={icon} size={16} />
+      </span>
       <div>
         <p className="text-[10px] text-sage-600 font-bold uppercase tracking-[0.15em]">{label}</p>
         <p className="text-sm font-semibold text-ink">{value}</p>

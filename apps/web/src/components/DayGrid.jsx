@@ -7,13 +7,11 @@ export default function DayGrid({ currentDate, actividades, selectedTipos, onAct
   const iso = currentDate.toISOString().slice(0, 10)
   const [y, m, d] = iso.split('-').map(Number)
 
-  const dayActs = actividades.filter(
-    (a) => a.fecha === iso && selectedTipos.includes(a.tipo)
-  )
+  const dayActs = actividades.filter((a) => a.fecha === iso && selectedTipos.includes(a.tipo))
 
   const topOffset = (hora) => {
     const [h, min] = hora.split(':').map(Number)
-    return ((h - 7) + min / 60) * ROW_H
+    return (h - 7 + min / 60) * ROW_H
   }
 
   return (
@@ -42,7 +40,9 @@ export default function DayGrid({ currentDate, actividades, selectedTipos, onAct
             {String(d).padStart(2, '0')}/{String(m).padStart(2, '0')}/{y}
           </span>
           {dayActs.length > 0 && (
-            <span className="ml-2 text-xs text-sage-700 font-semibold">({dayActs.length} actividades)</span>
+            <span className="ml-2 text-xs text-sage-700 font-semibold">
+              ({dayActs.length} actividades)
+            </span>
           )}
         </div>
 
@@ -70,7 +70,9 @@ export default function DayGrid({ currentDate, actividades, selectedTipos, onAct
               }}
               title={a.concepto}
             >
-              <div className="font-bold truncate">{a.hora} — {a.concepto}</div>
+              <div className="font-bold truncate">
+                {a.hora} — {a.concepto}
+              </div>
               <div className="text-xs opacity-90 truncate">
                 {a.conductor ?? a.voluntario ?? a.responsable ?? ''}
                 {a.lugar ? ` · ${a.lugar}` : ''}

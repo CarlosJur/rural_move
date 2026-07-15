@@ -6,7 +6,7 @@ export default {
       colors: {
         // Sage / menta — color principal (coche + fondo logo Rural Move)
         sage: {
-          50:  '#F4F8F5',
+          50: '#F4F8F5',
           100: '#E6EFE8',
           200: '#CFE0D4',
           300: '#B4CEBC',
@@ -19,7 +19,7 @@ export default {
         },
         // Rojo institucional — escudo + "move"
         rioja: {
-          50:  '#FCEDEF',
+          50: '#FCEDEF',
           100: '#F9D6DA',
           200: '#F0A7AF',
           300: '#E37582',
@@ -32,7 +32,7 @@ export default {
         },
         // Dorado heráldico — castillo y corona del escudo
         gold: {
-          50:  '#FBF5E6',
+          50: '#FBF5E6',
           100: '#F6E8BD',
           200: '#EFD37F',
           300: '#E0B947',
@@ -45,7 +45,7 @@ export default {
         },
         // Verde laurel — palmas del escudo
         laurel: {
-          50:  '#EFF6F0',
+          50: '#EFF6F0',
           100: '#D7E8D9',
           200: '#A9CCAF',
           300: '#7BAD83',
@@ -64,7 +64,7 @@ export default {
         },
         // Crema/marfil — papel institucional
         cream: {
-          50:  '#FBF8F0',
+          50: '#FBF8F0',
           100: '#F5F0E2',
           200: '#EBE3CC',
         },
@@ -72,17 +72,18 @@ export default {
       },
       fontFamily: {
         display: ['"Playfair Display"', 'Georgia', 'serif'],
-        script:  ['"Dancing Script"', '"Brush Script MT"', 'cursive'],
-        sans:    ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        script: ['"Dancing Script"', '"Brush Script MT"', 'cursive'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
       },
       boxShadow: {
-        'card':     '0 2px 12px -2px rgba(31, 45, 41, 0.08), 0 1px 3px -1px rgba(31, 45, 41, 0.06)',
-        'card-hover': '0 8px 24px -6px rgba(31, 45, 41, 0.15), 0 2px 6px -1px rgba(31, 45, 41, 0.08)',
-        'heraldic': '0 4px 16px -4px rgba(200, 16, 46, 0.25)',
+        card: '0 2px 12px -2px rgba(31, 45, 41, 0.08), 0 1px 3px -1px rgba(31, 45, 41, 0.06)',
+        'card-hover':
+          '0 8px 24px -6px rgba(31, 45, 41, 0.15), 0 2px 6px -1px rgba(31, 45, 41, 0.08)',
+        heraldic: '0 4px 16px -4px rgba(200, 16, 46, 0.25)',
       },
       backgroundImage: {
         'sage-gradient': 'linear-gradient(135deg, #E6EFE8 0%, #CFE0D4 100%)',
-        'cream-paper':   'linear-gradient(180deg, #FBF8F0 0%, #F5F0E2 100%)',
+        'cream-paper': 'linear-gradient(180deg, #FBF8F0 0%, #F5F0E2 100%)',
       },
     },
   },

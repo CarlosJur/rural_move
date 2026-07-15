@@ -4,7 +4,13 @@ import { mondayOffset, DIAS_SEMANA_SHORT } from '../utils/dateUtils'
 const HOURS = Array.from({ length: 16 }, (_, i) => i + 7) // 7:00–22:00
 const ROW_H = 56 // px per hour
 
-export default function WeekGrid({ currentDate, actividades, selectedTipos, onDayClick, onActivityClick }) {
+export default function WeekGrid({
+  currentDate,
+  actividades,
+  selectedTipos,
+  onDayClick,
+  onActivityClick,
+}) {
   const offset = mondayOffset(currentDate)
   const monday = new Date(currentDate)
   monday.setDate(currentDate.getDate() - offset)
@@ -28,7 +34,7 @@ export default function WeekGrid({ currentDate, actividades, selectedTipos, onDa
 
   const topOffset = (hora) => {
     const [h, m] = hora.split(':').map(Number)
-    return ((h - 7) + m / 60) * ROW_H
+    return (h - 7 + m / 60) * ROW_H
   }
 
   return (
@@ -64,7 +70,9 @@ export default function WeekGrid({ currentDate, actividades, selectedTipos, onDa
                   isToday ? 'bg-rioja-50/80' : ''
                 }`}
               >
-                <div className="text-[10px] text-sage-700 font-bold uppercase tracking-[0.12em]">{DIAS_SEMANA_SHORT[i]}</div>
+                <div className="text-[10px] text-sage-700 font-bold uppercase tracking-[0.12em]">
+                  {DIAS_SEMANA_SHORT[i]}
+                </div>
                 <div
                   className={`text-sm font-bold mt-0.5 w-7 h-7 rounded-full flex items-center justify-center mx-auto ${
                     isToday ? 'bg-rioja-500 text-white shadow-heraldic' : 'text-sage-800'
@@ -78,7 +86,10 @@ export default function WeekGrid({ currentDate, actividades, selectedTipos, onDa
         </div>
 
         {/* Time grid */}
-        <div className="grid grid-cols-7 relative bg-white" style={{ height: HOURS.length * ROW_H }}>
+        <div
+          className="grid grid-cols-7 relative bg-white"
+          style={{ height: HOURS.length * ROW_H }}
+        >
           {HOURS.map((h) => (
             <div
               key={h}
